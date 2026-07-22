@@ -44,36 +44,16 @@
     height: 100vh;
     display: none;
     position: relative;
-    padding: 60px 80px;
-    animation: fadeIn 0.6s ease;
+    padding: 60px 80px 100px 80px;
+    animation: fadeIn 0.4s ease;
     overflow-y: auto;
   }
 
   .slide.active { display: flex; flex-direction: column; }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes morphIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes wipeIn {
-    from { clip-path: inset(0 100% 0 0); }
-    to { clip-path: inset(0 0 0 0); }
-  }
-
-  @keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
   }
 
   /* ================= NAVIGATION ================= */
@@ -96,7 +76,7 @@
   .nav-btn {
     background: var(--slate-700);
     border: none;
-    color: var(--slate-300);
+    color: var(--white);
     padding: 10px 24px;
     border-radius: 8px;
     cursor: pointer;
@@ -106,7 +86,7 @@
     transition: all 0.2s;
   }
 
-  .nav-btn:hover {
+  .nav-btn:hover:not(:disabled) {
     background: var(--electric-blue);
     color: var(--deep-slate);
   }
@@ -117,9 +97,9 @@
   }
 
   .slide-counter {
-    font-size: 13px;
-    color: var(--slate-400);
-    font-weight: 500;
+    font-size: 14px;
+    color: var(--slate-300);
+    font-weight: 600;
   }
 
   .progress-track {
@@ -135,7 +115,7 @@
   .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--electric-blue), var(--violet));
-    transition: width 0.5s ease;
+    transition: width 0.3s ease;
     width: 0%;
   }
 
@@ -238,13 +218,12 @@
     border-radius: 16px;
     padding: 28px;
     transition: all 0.3s;
-    cursor: pointer;
   }
 
   .card:hover {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 
   .card-icon {
@@ -275,15 +254,15 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
-    padding: 40px;
+    padding: 32px;
     margin-top: 32px;
     max-width: 900px;
   }
 
   .poll-question {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
 
   .poll-options {
@@ -296,7 +275,7 @@
     background: var(--slate-800);
     border: 2px solid var(--slate-700);
     border-radius: 12px;
-    padding: 18px 24px;
+    padding: 16px 24px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
@@ -372,47 +351,12 @@
     transition: width 1s ease;
   }
 
-  /* ================= TIMER ================= */
-  .timer-container {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 100;
-  }
-
-  .timer-circle {
-    width: 80px;
-    height: 80px;
-    position: relative;
-  }
-
-  .timer-circle svg {
-    transform: rotate(-90deg);
-  }
-
-  .timer-circle circle {
-    fill: none;
-    stroke-width: 6;
-  }
-
-  .timer-bg { stroke: var(--slate-700); }
-  .timer-progress { stroke: var(--coral); stroke-linecap: round; }
-
-  .timer-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    font-weight: 800;
-  }
-
   /* ================= QUIZ ================= */
   .quiz-container {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
-    padding: 40px;
+    padding: 32px;
     margin-top: 32px;
     max-width: 900px;
   }
@@ -472,9 +416,8 @@
     border-radius: 16px;
     padding: 28px;
     cursor: pointer;
-    transition: all 0.4s;
+    transition: all 0.3s;
     position: relative;
-    overflow: hidden;
     min-height: 160px;
   }
 
@@ -482,30 +425,9 @@
     border-color: var(--violet);
   }
 
-  .myth-card.revealed .myth-front {
-    opacity: 0;
-    transform: rotateY(180deg);
-    pointer-events: none;
-  }
-
-  .myth-card.revealed .myth-back {
-    opacity: 1;
-    transform: rotateY(0);
-  }
-
-  .myth-front, .myth-back {
-    transition: all 0.4s;
-    backface-visibility: hidden;
-  }
-
-  .myth-back {
-    position: absolute;
-    top: 28px;
-    left: 28px;
-    right: 28px;
-    opacity: 0;
-    transform: rotateY(-180deg);
-  }
+  .myth-card.revealed .myth-front { display: none; }
+  .myth-card.revealed .myth-back { display: block; }
+  .myth-back { display: none; }
 
   .myth-label {
     font-size: 11px;
@@ -518,16 +440,16 @@
   .myth-label.myth { color: var(--rose); }
   .myth-label.reality { color: var(--emerald); }
 
-  /* ================= CASE STUDY ================= */
-  .case-study {
+  /* ================= CASE STUDY & DEBATE ================= */
+  .case-study, .debate-arena {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 32px;
     margin-top: 32px;
     align-items: start;
   }
 
-  .case-info {
+  .case-info, .debate-team {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
@@ -587,53 +509,11 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .comparison-table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
-  }
-
   .rating {
     color: var(--amber);
     font-size: 16px;
     letter-spacing: 2px;
   }
-
-  /* ================= DEBATE ================= */
-  .debate-arena {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-top: 32px;
-  }
-
-  .debate-team {
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 32px;
-    text-align: center;
-  }
-
-  .debate-team.team-a {
-    border-color: var(--coral);
-  }
-
-  .debate-team.team-b {
-    border-color: var(--electric-blue);
-  }
-
-  .team-badge {
-    display: inline-block;
-    padding: 8px 20px;
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-  }
-
-  .team-a .team-badge { background: rgba(249, 115, 22, 0.15); color: var(--coral); }
-  .team-b .team-badge { background: rgba(56, 189, 248, 0.15); color: var(--electric-blue); }
 
   /* ================= DESIGN CHALLENGE ================= */
   .challenge-options {
@@ -723,50 +603,28 @@
     white-space: pre-wrap;
   }
 
-  /* ================= RESPONSIVE ================= */
   @media (max-width: 1024px) {
-    .slide { padding: 40px 24px; }
+    .slide { padding: 40px 24px 90px 24px; }
     h1 { font-size: 36px; }
     h2 { font-size: 28px; }
     .case-study, .debate-arena, .challenge-options { grid-template-columns: 1fr; }
     .quiz-options { grid-template-columns: 1fr; }
   }
 
-  /* ================= UTILITY ================= */
   .flex-grow { flex: 1; }
-  .text-center { text-align: center; }
-  .mt-4 { margin-top: 16px; }
-  .mt-8 { margin-top: 32px; }
-  .mb-4 { margin-bottom: 16px; }
   .gradient-text {
     background: linear-gradient(135deg, var(--electric-blue), var(--violet));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .highlight { color: var(--electric-blue); }
-  .danger { color: var(--rose); }
-  .success { color: var(--emerald); }
-  .warning { color: var(--amber); }
 </style>
-<base target="_blank">
 </head>
 <body>
 
 <!-- Progress Bar -->
 <div class="progress-track">
   <div class="progress-fill" id="progressFill"></div>
-</div>
-
-<!-- Timer (hidden by default) -->
-<div class="timer-container" id="timerContainer" style="display:none;">
-  <div class="timer-circle">
-    <svg width="80" height="80">
-      <circle class="timer-bg" cx="40" cy="40" r="36"></circle>
-      <circle class="timer-progress" id="timerProgress" cx="40" cy="40" r="36" 
-              stroke-dasharray="283" stroke-dashoffset="0"></circle>
-    </svg>
-    <div class="timer-text" id="timerText">60</div>
-  </div>
 </div>
 
 <!-- Speaker Notes Panel -->
@@ -778,24 +636,24 @@
 
 <!-- ================= SLIDES ================= -->
 
-<!-- SLIDE 1: Title -->
-<div class="slide active" data-slide="1" data-notes="OPENING (2 min): Welcome everyone. Pause 10 seconds in silence. Outline the session: 10 sections, live polls, group debate, design challenge. Say: 'Your instinctive answer today will be tested against 5,000 years of evidence.' Ensure Mentimeter/Slido is loaded. Test QR codes. Have timer ready.">
+<!-- SLIDE 1 -->
+<div class="slide active" data-notes="OPENING (2 min): Welcome everyone. Pause 10 seconds in silence. Outline the session: 10 sections, live polls, group debate, design challenge. Say: 'Your instinctive answer today will be tested against 5,000 years of evidence.'">
   <div class="flex-grow">
     <div style="font-size: 13px; color: var(--slate-400); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">CIVIL · ARCHITECTURE · CONSTRUCTION ENGINEERING</div>
     <h1 style="font-size: 72px;">FORM <span style="color: var(--slate-600);">VS</span> FUNCTION</h1>
     <p class="subtitle" style="font-size: 24px;">Should Aesthetics or Performance Lead Construction?</p>
 
     <div style="display: flex; gap: 40px; margin-top: 48px;">
-      <div style="text-align: center;">
+      <div>
         <div style="font-size: 48px; font-weight: 900; color: var(--electric-blue);">120</div>
         <div style="font-size: 12px; color: var(--slate-400); text-transform: uppercase; letter-spacing: 2px;">Minutes</div>
       </div>
-      <div style="text-align: center;">
+      <div>
         <div style="font-size: 48px; font-weight: 900; color: var(--electric-blue);">10</div>
         <div style="font-size: 12px; color: var(--slate-400); text-transform: uppercase; letter-spacing: 2px;">Sections</div>
       </div>
-      <div style="text-align: center;">
-        <div style="font-size: 48px; font-weight: 900; color: var(--electric-blue);">50+</div>
+      <div>
+        <div style="font-size: 48px; font-weight: 900; color: var(--electric-blue);"><span class="total-slides-display">52</span></div>
         <div style="font-size: 12px; color: var(--slate-400); text-transform: uppercase; letter-spacing: 2px;">Slides</div>
       </div>
     </div>
@@ -805,20 +663,20 @@
     <div style="font-size: 11px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">📋 Presenter Quick Reference</div>
     <div style="font-size: 13px; color: var(--slate-400); line-height: 1.8;">
       • Poll Code: <strong style="color: var(--white);">FORM2024</strong> &nbsp;|&nbsp; 4 Live Polls &nbsp;|&nbsp; 1 Team Debate &nbsp;|&nbsp; 1 Design Challenge<br>
-      • Videos: Tacoma Narrows + Burj Khalifa &nbsp;|&nbsp; Total: 120 min &nbsp;|&nbsp; 10 Sections
+      • Videos: Tacoma Narrows + Burj Khalifa &nbsp;|&nbsp; Total: 120 min
     </div>
   </div>
 </div>
 
-<!-- SLIDE 2: Opening Hook -->
-<div class="slide" data-slide="2" data-notes="OPENING HOOK (2 min): Walk to front. Pause 5 seconds — don't explain the images. Then ask: 'Which of these is more successful?' The room will split. Left: globally beloved, 14x over budget. Right: invisible, reliable. Let the tension sit. Don't resolve it yet.">
+<!-- SLIDE 2 -->
+<div class="slide" data-notes="OPENING HOOK (2 min): Walk to front. Ask: 'Which of these is more successful?' Left: globally beloved, 14x over budget. Right: invisible, reliable. Let the tension sit.">
   <div class="section-badge">
     <span class="section-number">⚡</span>
     <span>Opening Hook</span>
   </div>
   <h2>What if the world's most beautiful structure failed tomorrow?</h2>
 
-  <div class="case-study" style="grid-template-columns: 1fr 1fr;">
+  <div class="case-study">
     <div class="case-info" style="border-color: var(--rose);">
       <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Option A</div>
       <h3 style="color: var(--rose);">14× over budget. 12 years delayed. Globally beloved.</h3>
@@ -832,8 +690,8 @@
   </div>
 </div>
 
-<!-- SLIDE 3: The Choice -->
-<div class="slide" data-slide="3" data-notes="THINK-PAIR-SHARE (2 min): 'Think for 30 seconds. Then pair with your neighbour. Share your answer. You have 60 seconds total.' Walk around — listen. After 60s, ring bell. Ask 2-3 people to share. Don't debate yet — say: 'Remember your choice. By the end of today, you may have changed your mind.'">
+<!-- SLIDE 3 -->
+<div class="slide" data-notes="THINK-PAIR-SHARE (2 min): 'Think for 30 seconds. Pair with your neighbour. Share your answer. You have 60 seconds total.'">
   <div class="section-badge">
     <span class="section-number">💬</span>
     <span>Think · Pair · Share</span>
@@ -859,38 +717,37 @@
       </div>
     </div>
     <div style="text-align: center; margin-top: 24px; color: var(--slate-400); font-size: 14px;">
-      ⏱️ 60 seconds · Discuss with your neighbour · No right answer yet
+      ⏱️ 60 seconds · Discuss with your neighbour
     </div>
   </div>
 </div>
 
-<!-- SLIDE 4: Live Poll 1 -->
-<div class="slide" data-slide="4" data-notes="LIVE POLL #1 (1.5 min): Use Mentimeter or show of hands. RECORD these results — compared to Poll #2 at the end. Say: 'Remember your answer. We revisit this exact question in the final 10 minutes.' Expected: ~40% Performance, 35% Equal, 25% Aesthetics.">
+<!-- SLIDE 4 -->
+<div class="slide" data-notes="LIVE POLL #1 (1.5 min): Record these results — compared to Poll #2 at the end.">
   <div class="section-badge">
     <span class="section-number">🗳️</span>
     <span>Live Poll 1 of 2</span>
   </div>
   <h2>What should lead construction projects?</h2>
-  <p class="subtitle">Record these results — we compare to Poll #2 at the end.</p>
 
   <div style="display: flex; gap: 40px; margin-top: 32px;">
     <div class="poll-container" style="flex: 1;">
       <div class="poll-question">Cast your vote:</div>
       <div class="poll-options">
-        <div class="poll-option" onclick="selectPollOption(this, 'A')">
+        <div class="poll-option" onclick="selectPollOption(this)">
           <div class="poll-letter">A</div>
           <span>Aesthetics</span>
         </div>
-        <div class="poll-option" onclick="selectPollOption(this, 'B')">
+        <div class="poll-option" onclick="selectPollOption(this)">
           <div class="poll-letter">B</div>
           <span>Performance</span>
         </div>
-        <div class="poll-option" onclick="selectPollOption(this, 'C')">
+        <div class="poll-option" onclick="selectPollOption(this)">
           <div class="poll-letter">C</div>
           <span>Equal Balance</span>
         </div>
       </div>
-      <button class="nav-btn mt-8" style="width: 100%;" onclick="showPollResults()">Reveal Results</button>
+      <button class="nav-btn" style="width: 100%; margin-top: 20px;" onclick="showPollResults('poll1Results')">Reveal Results</button>
       <div class="poll-results" id="poll1Results">
         <div class="result-bar">
           <div class="result-label">Aesthetics</div>
@@ -906,46 +763,30 @@
         </div>
       </div>
     </div>
-
-    <div style="width: 320px;">
-      <div style="background: var(--white); border-radius: 16px; padding: 32px; text-align: center;">
-        <div style="font-size: 48px; margin-bottom: 12px;">📱</div>
-        <div style="font-size: 18px; font-weight: 700; color: var(--deep-slate); margin-bottom: 8px;">SCAN TO VOTE</div>
-        <div style="font-size: 14px; color: var(--slate-600); margin-bottom: 16px;">menti.com</div>
-        <div style="font-size: 32px; font-weight: 900; color: var(--blue-600);">FORM2024</div>
-        <div style="width: 160px; height: 160px; background: var(--slate-100); margin: 16px auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--slate-400); font-size: 12px;">QR CODE<br>PLACEHOLDER</div>
-      </div>
-      <div style="background: var(--slate-800); border-radius: 12px; padding: 16px; margin-top: 12px; text-align: center;">
-        <div style="font-size: 12px; color: var(--amber); font-weight: 700;">⏱️ 60 SECOND VOTE</div>
-        <div style="font-size: 11px; color: var(--slate-400); margin-top: 4px;">Results hidden until closing poll</div>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- SLIDE 5: Central Tension -->
-<div class="slide" data-slide="5" data-notes="CENTRAL TENSION (1 min): Deliver slowly. Sullivan (1896) meant beauty should EMERGE from purpose — not be added as decoration. Wright went further: they are inseparable. Say: 'This lecture will not give you THE answer. It will give you the evidence to form your own.'">
-  <div class="flex-grow">
+<!-- SLIDE 5 -->
+<div class="slide" data-notes="CENTRAL TENSION (1 min): Deliver slowly. Sullivan (1896) vs Wright (1939).">
+  <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <h2 style="text-align: center; margin-bottom: 48px;">Throughout history, engineers and architects have argued over one question:</h2>
-
     <div style="display: flex; align-items: center; justify-content: center; gap: 40px;">
       <div style="text-align: center;">
-        <div style="font-size: 48px; font-weight: 900; color: var(--electric-blue); font-family: 'Montserrat', sans-serif;">FORM FOLLOWS<br>FUNCTION</div>
+        <div style="font-size: 44px; font-weight: 900; color: var(--electric-blue); font-family: 'Montserrat', sans-serif;">FORM FOLLOWS<br>FUNCTION</div>
       </div>
       <div style="font-size: 32px; color: var(--slate-600); font-weight: 300;">— or —</div>
       <div style="text-align: center;">
-        <div style="font-size: 48px; font-weight: 900; color: var(--coral); font-family: 'Montserrat', sans-serif;">FUNCTION FOLLOWS<br>FORM</div>
+        <div style="font-size: 44px; font-weight: 900; color: var(--coral); font-family: 'Montserrat', sans-serif;">FUNCTION FOLLOWS<br>FORM</div>
       </div>
     </div>
-
     <div style="text-align: center; margin-top: 48px;">
       <div style="font-size: 20px; color: var(--slate-400); font-weight: 600;">Today — <span class="gradient-text">you decide.</span></div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 6: Section 01 Divider -->
-<div class="slide" data-slide="6" data-notes="SECTION 01 OPENER (10 min total): 'For the next 10 minutes, we define the terms that shaped 5,000 years of construction. These aren't abstract ideas — they're decisions you make daily.' Transition from opening: 'You voted. You chose. Now let's understand what you chose BETWEEN.'">
+<!-- SLIDE 6 -->
+<div class="slide" data-notes="SECTION 01 OPENER (10 min total): Transition to definitions and foundational history.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">01</span>
@@ -954,11 +795,10 @@
     <h1 style="font-size: 80px;">THE GREAT<br>DEBATE</h1>
     <p class="subtitle" style="font-size: 22px;">Definitions. Famous quotes. The tension that has driven construction for millennia.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 1 of 10</div>
 </div>
 
-<!-- SLIDE 7: What is Form? -->
-<div class="slide" data-slide="7" data-notes="WHAT IS FORM? (3 min): 'Form is not just how it looks. Form is how it FEELS. How it occupies space. How it shapes human experience.' Walk through 4 dimensions. Interactive: 'Close your eyes. Think of a building that made you FEEL something. Not think — FEEL.' Take 3-4 answers. Notice most name FORM-driven buildings. Key point: 'Form is communication. It tells people who they are.'">
+<!-- SLIDE 7 -->
+<div class="slide" data-notes="WHAT IS FORM? (3 min): Form is visible, spatial, and experiential. Form is communication.">
   <div class="section-badge">
     <span class="section-number">📐</span>
     <span>Defining the Terms</span>
@@ -990,8 +830,8 @@
   </div>
 </div>
 
-<!-- SLIDE 8: What is Function? -->
-<div class="slide" data-slide="8" data-notes="WHAT IS FUNCTION? (3 min): 'Function is not just does it stand up. Function is: does it stand up for 100 years? Does it use less energy? Can we fix it when it breaks?' Walk through 4 dimensions. Interactive: 'Think of a building that works perfectly but you can't remember what it looks like.' Most will name office parks, warehouses. Key point: 'Function is not boring. Function is RESPONSIBILITY.'">
+<!-- SLIDE 8 -->
+<div class="slide" data-notes="WHAT IS FUNCTION? (3 min): Safety, durability, carbon performance, and lifecycle cost.">
   <div class="section-badge">
     <span class="section-number">⚙️</span>
     <span>Defining the Terms</span>
@@ -1018,13 +858,13 @@
     <div class="card">
       <div class="card-icon" style="background: rgba(245, 158, 11, 0.15);">💰</div>
       <h4 style="color: var(--amber);">Cost Efficiency</h4>
-      <p>Budget is a boundary condition. Not a suggestion. Not an obstacle — a creative constraint.</p>
+      <p>Budget is a boundary condition. Not a suggestion — a creative constraint.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 9: The Two Foundational Positions -->
-<div class="slide" data-slide="9" data-notes="THE TWO POSITIONS (2 min): Present both quotes. Then DISCUSSION PROMPT (90 sec): 'Turn to your neighbor. Do these quotes agree or disagree? Which resonates more?' Walk around — listen. After 60s, ring bell. Ask 2-3 pairs to share. Key learning: Sullivan = hierarchy (function first). Wright = unity (no separation). Both reject decoration for decoration's sake.">
+<!-- SLIDE 9 -->
+<div class="slide" data-notes="THE TWO POSITIONS (2 min): Sullivan vs Wright. Discuss with neighbour for 90s.">
   <div class="section-badge">
     <span class="section-number">💬</span>
     <span>Discussion · 90 Seconds</span>
@@ -1037,24 +877,18 @@
         "Form ever follows function."
         <div class="quote-author">— LOUIS SULLIVAN, 1896<br>Father of the modern skyscraper</div>
       </div>
-      <p style="color: var(--slate-400); margin-top: 16px; line-height: 1.6;">Beauty must emerge from purpose, not be applied to it. Decoration is a crime.</p>
     </div>
     <div class="case-info" style="border-left: 4px solid var(--coral);">
       <div class="quote" style="border-left: none; padding-left: 0; font-size: 28px;">
         "Form and function are one."
         <div class="quote-author">— FRANK LLOYD WRIGHT, 1939<br>Sullivan's student</div>
       </div>
-      <p style="color: var(--slate-400); margin-top: 16px; line-height: 1.6;">Not cause and effect — they are a unified, inseparable reality.</p>
     </div>
-  </div>
-
-  <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--electric-blue);">💬 DISCUSSION (90 sec with neighbour): Do these quotes agree or disagree? Which resonates more with you?</div>
   </div>
 </div>
 
-<!-- SLIDE 10: Why This Debate Is Still Alive -->
-<div class="slide" data-slide="10" data-notes="WHY ALIVE (3 min): Three statistics that matter. $22T — every design decision has civilizational consequences. 30%+ failures link to design-phase decisions. 100yr lifespan — decisions outlive you. Emotional beat: 'The buildings you design will be lived in by people not yet born. This is your professional responsibility.'">
+<!-- SLIDE 10 -->
+<div class="slide" data-notes="WHY ALIVE (3 min): $22T global output, 30%+ design failures, 100yr lifespan.">
   <div class="section-badge">
     <span class="section-number">📊</span>
     <span>Why This Matters</span>
@@ -1063,26 +897,22 @@
 
   <div style="display: flex; gap: 32px; margin-top: 40px;">
     <div style="flex: 1; text-align: center; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
-      <div style="font-size: 72px; font-weight: 900; color: var(--electric-blue); font-family: 'Montserrat', sans-serif;">$22T</div>
-      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px; line-height: 1.6;">Global annual construction output<br><span style="color: var(--slate-300);">Every design decision at this scale has civilizational consequences</span></div>
+      <div style="font-size: 64px; font-weight: 900; color: var(--electric-blue);">$22T</div>
+      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px;">Global annual construction output</div>
     </div>
     <div style="flex: 1; text-align: center; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
-      <div style="font-size: 72px; font-weight: 900; color: var(--coral); font-family: 'Montserrat', sans-serif;">30%+</div>
-      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px; line-height: 1.6;">Of significant failures link to design-phase decisions<br><span style="color: var(--slate-300);">Prioritising one dimension too heavily creates real risk</span></div>
+      <div style="font-size: 64px; font-weight: 900; color: var(--coral);">30%+</div>
+      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px;">Failures linked to design-phase choices</div>
     </div>
     <div style="flex: 1; text-align: center; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
-      <div style="font-size: 72px; font-weight: 900; color: var(--emerald); font-family: 'Montserrat', sans-serif;">100yr</div>
-      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px; line-height: 1.6;">Lifespan of major infrastructure<br><span style="color: var(--slate-300);">Decisions you make today outlive you</span></div>
+      <div style="font-size: 64px; font-weight: 900; color: var(--emerald);">100yr</div>
+      <div style="font-size: 14px; color: var(--slate-400); margin-top: 12px;">Lifespan of major infrastructure</div>
     </div>
-  </div>
-
-  <div class="quote" style="margin-top: 40px; text-align: center; border-left: none;">
-    The buildings you design will be lived in, maintained, and criticised by people not yet born.<br>This debate is your <span class="highlight">professional responsibility</span>.
   </div>
 </div>
 
-<!-- SLIDE 11: Section 02 Divider -->
-<div class="slide" data-slide="11" data-notes="SECTION 02 OPENER (15 min): 'This debate isn't new. It's 5,000 years old. And the ancients were better at resolving it than we are.' Storytelling tip: Walk through timeline like a museum guide.">
+<!-- SLIDE 11 -->
+<div class="slide" data-notes="SECTION 02 OPENER (15 min): Historical Evolution.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">02</span>
@@ -1091,11 +921,10 @@
     <h1 style="font-size: 80px;">HISTORICAL<br>EVOLUTION</h1>
     <p class="subtitle" style="font-size: 22px;">From the Pyramids to parametric design — 5,000 years of the same unresolved debate.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 2 of 10</div>
 </div>
 
-<!-- SLIDE 12: Ancient Architecture -->
-<div class="slide" data-slide="12" data-notes="ANCIENT (4 min): Egyptian Pyramids — cosmic alignment + royal legitimacy AS the engineering brief. Parthenon — columns curved (entasis) to counteract optical distortion. Pantheon — oculus solves structural load AND delivers divine light. Key insight: 'The ancients never separated form from function — function included spiritual meaning.'">
+<!-- SLIDE 12 -->
+<div class="slide" data-notes="ANCIENT ARCHITECTURE (4 min): Pyramids, Parthenon, Pantheon.">
   <div class="section-badge">
     <span class="section-number">🏛️</span>
     <span>3000 BCE — 400 CE</span>
@@ -1106,28 +935,23 @@
     <div class="card">
       <div style="font-size: 48px; margin-bottom: 16px;">🔺</div>
       <h4>Egyptian Pyramids</h4>
-      <p>Cosmic alignment + royal legitimacy <strong style="color: var(--electric-blue);">as the engineering brief</strong>. Form served cosmic function.</p>
+      <p>Cosmic alignment + royal legitimacy as the engineering brief. Form served cosmic function.</p>
     </div>
     <div class="card">
       <div style="font-size: 48px; margin-bottom: 16px;">🏛️</div>
       <h4>The Parthenon</h4>
-      <p>Columns curved (entasis) to <strong style="color: var(--electric-blue);">counteract optical distortion</strong>. Engineering serving visual truth.</p>
+      <p>Columns curved (entasis) to counteract optical distortion. Engineering serving visual truth.</p>
     </div>
     <div class="card">
       <div style="font-size: 48px; margin-bottom: 16px;">⭕</div>
       <h4>The Pantheon</h4>
-      <p>Oculus solves structural load <strong style="color: var(--electric-blue);">AND delivers divine light</strong>. One solution, two functions.</p>
+      <p>Oculus solves structural load AND delivers divine light. One solution, two functions.</p>
     </div>
-  </div>
-
-  <div style="background: rgba(16, 185, 129, 0.05); border-left: 4px solid var(--emerald); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--emerald);">💡 Key Insight</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">The ancients never separated form from function — <strong>function included spiritual meaning.</strong></div>
   </div>
 </div>
 
-<!-- SLIDE 13: Gothic Cathedrals -->
-<div class="slide" data-slide="13" data-notes="GOTHIC (3 min): The flying buttress — invented to solve structural thrust — unlocked walls of glass and soaring height. 'Engineering innovation can unlock aesthetic possibilities impossible without it.' Show how the buttress transferred lateral loads outward, freeing the wall for stained glass.">
+<!-- SLIDE 13 -->
+<div class="slide" data-notes="GOTHIC CATHEDRALS (3 min): Flying buttress unlocked walls of stained glass.">
   <div class="section-badge">
     <span class="section-number">⛪</span>
     <span>1100 — 1500 CE</span>
@@ -1139,204 +963,120 @@
     <div>
       <div class="card" style="margin-bottom: 16px;">
         <h4 style="color: var(--electric-blue);">🔧 Engineering Invention</h4>
-        <p>External arches transfer lateral vault loads <strong>outward</strong> to freestanding piers.</p>
-      </div>
-      <div class="card" style="margin-bottom: 16px;">
-        <h4 style="color: var(--violet);">🎨 Aesthetic Unlock</h4>
-        <p>Freed the wall from load-bearing — enabling <strong>vast stained-glass windows</strong>.</p>
+        <p>External arches transfer lateral vault loads outward to freestanding piers.</p>
       </div>
       <div class="card">
-        <h4 style="color: var(--emerald);">📐 Spatial Result</h4>
-        <p>Soaring height previously <strong>impossible</strong> with Roman construction methods.</p>
+        <h4 style="color: var(--violet);">🎨 Aesthetic Unlock</h4>
+        <p>Freed the wall from load-bearing — enabling vast stained-glass windows.</p>
       </div>
     </div>
-    <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.08);">
-      <div style="font-size: 120px; opacity: 0.3;">⛪</div>
-      <div style="text-align: center; margin-top: 16px; color: var(--slate-400);">Flying buttress diagram<br><span style="font-size: 12px;">(Visual placeholder — insert cathedral image)</span></div>
+    <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 32px; text-align: center;">
+      <div style="font-size: 96px; opacity: 0.4;">⛪</div>
+      <p style="color: var(--slate-400);">Structural innovation directly unlocked artistic expression.</p>
     </div>
-  </div>
-
-  <div style="background: rgba(139, 92, 246, 0.05); border-left: 4px solid var(--violet); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 24px;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--violet);">💡 Lesson</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">Engineering innovation can unlock <strong>aesthetic possibilities impossible without it.</strong></div>
   </div>
 </div>
 
-<!-- SLIDE 14: Industrial Revolution -->
-<div class="slide" data-slide="14" data-notes="INDUSTRIAL (3 min): Iron, steel, and glass gave engineers unprecedented power — and created an identity crisis. Crystal Palace (1851): prefabricated iron and glass, built in 9 months. 'Architecture or industrial shed?' Eiffel Tower (1889): despised by Parisians. Curves were structurally optimal. Now the world's most visited monument.">
+<!-- SLIDE 14 -->
+<div class="slide" data-notes="INDUSTRIAL REVOLUTION (3 min): Crystal Palace & Eiffel Tower.">
   <div class="section-badge">
     <span class="section-number">🏭</span>
     <span>1760 — 1900</span>
   </div>
   <h2>Industrial Revolution</h2>
-  <p class="subtitle">Iron, steel, and glass gave engineers unprecedented power — and created an identity crisis.</p>
 
   <div class="case-study">
     <div class="case-info">
       <div style="font-size: 11px; color: var(--amber); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Crystal Palace · 1851</div>
-      <h3 style="color: var(--amber);">Prefabricated iron and glass</h3>
-      <p style="color: var(--slate-400); margin-top: 12px; line-height: 1.6;">Built in <strong style="color: var(--white);">9 months</strong>. The question that haunted architects: <em>Is this architecture or an industrial shed?</em></p>
-      <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--amber);">⚡ First large-scale prefabrication</div>
+      <h3 style="color: var(--amber);">Prefabricated iron & glass</h3>
+      <p style="color: var(--slate-400); margin-top: 12px;">Built in 9 months. Standardised structural components deployed at grand scale.</p>
     </div>
     <div class="case-info">
       <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Eiffel Tower · 1889</div>
-      <h3 style="color: var(--electric-blue);">Despised. Then beloved.</h3>
-      <p style="color: var(--slate-400); margin-top: 12px; line-height: 1.6;">Parisians hated it at opening. Its curves were <strong style="color: var(--white);">structurally optimal</strong>. Now the world's most visited monument.</p>
-      <div style="margin-top: 16px; padding: 12px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; font-size: 13px; color: var(--electric-blue);">🔄 Beauty emerged from structural logic</div>
+      <h3 style="color: var(--electric-blue);">Pure Structural Form</h3>
+      <p style="color: var(--slate-400); margin-top: 12px;">Despised initially by critics. Curves calculated precisely to counteract wind load.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 15: The Doctrine of Function -->
-<div class="slide" data-slide="15" data-notes="MODERNISM (4 min): 'A house is a machine for living in.' — Le Corbusier, 1923. Bauhaus abolished decoration. International Style: glass and steel towers — honest, efficient, global. But often cold, identical, inhuman. The consequence: housing estates that ignored human experience led to social collapse. 'Pure function failed too.'">
+<!-- SLIDE 15 -->
+<div class="slide" data-notes="MODERNISM (4 min): Bauhaus and the International Style.">
   <div class="section-badge">
     <span class="section-number">🏗️</span>
-    <span>1919 — 1960s · The Doctrine of Function</span>
+    <span>1919 — 1960s</span>
   </div>
-
-  <div class="quote" style="font-size: 36px; text-align: center; border-left: none;">
+  <div class="quote" style="font-size: 32px; text-align: center; border-left: none;">
     "A house is a machine for living in."
     <div class="quote-author">— LE CORBUSIER, 1923</div>
   </div>
 
-  <div class="card-grid" style="margin-top: 32px;">
+  <div class="card-grid">
     <div class="card">
-      <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Bauhaus · 1919</div>
-      <h4>Art School Revolution</h4>
-      <p>Abolished decoration entirely. Form must serve purpose — <strong style="color: var(--rose);">always. No exceptions.</strong></p>
+      <h4 style="color: var(--rose);">Bauhaus</h4>
+      <p>Eliminated unnecessary ornament. Form strictly follows functional demand.</p>
     </div>
     <div class="card">
-      <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">International Style</div>
-      <h4>Glass & Steel Towers</h4>
-      <p>Honest, efficient, global. But often <strong style="color: var(--electric-blue);">cold, identical, inhuman.</strong></p>
-    </div>
-    <div class="card">
-      <div style="font-size: 11px; color: var(--amber); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">The Consequence</div>
-      <h4>Social Collapse</h4>
-      <p>Housing estates that ignored human experience led to <strong style="color: var(--amber);">social breakdown.</strong> Pure function failed too.</p>
+      <h4 style="color: var(--electric-blue);">International Style</h4>
+      <p>Glass and steel skeletons. Efficient, clean, but criticized as cold or repetitive.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 16: 5,000 Years Timeline -->
-<div class="slide" data-slide="16" data-notes="TIMELINE SUMMARY (4 min): Walk through each era. Ancient: form serves cosmic function, no tension. Gothic: engineering unlocks form. Industrial: accidental beauty from structural logic. Modernism: function declared supreme, dehumanising. Contemporary: digital tools raise both axes. Discussion: 'Which era got the balance most right? What would it take to do better today?'">
+<!-- SLIDE 16 -->
+<div class="slide" data-notes="TIMELINE SUMMARY (4 min): Reviewing 5000 years of structural philosophy.">
   <div class="section-badge">
     <span class="section-number">📜</span>
-    <span>5,000 Years of Design Philosophy</span>
+    <span>5,000 Years Summary</span>
   </div>
-  <h2>The Evolution of the Debate</h2>
+  <h2>Timeline of Design Philosophy</h2>
 
-  <div style="position: relative; margin-top: 40px; padding-left: 40px;">
-    <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--electric-blue), var(--violet), var(--coral), var(--emerald), var(--amber));"></div>
-
-    <div style="margin-bottom: 32px; position: relative;">
-      <div style="position: absolute; left: -34px; width: 16px; height: 16px; background: var(--electric-blue); border-radius: 50%;"></div>
-      <div style="font-size: 12px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Ancient · 3000 BCE — 400 CE</div>
-      <div style="font-size: 16px; color: var(--slate-300); margin-top: 4px;">Form serves cosmic and spiritual function. <strong>No tension exists</strong> — function is holistic.</div>
-    </div>
-
-    <div style="margin-bottom: 32px; position: relative;">
-      <div style="position: absolute; left: -34px; width: 16px; height: 16px; background: var(--violet); border-radius: 50%;"></div>
-      <div style="font-size: 12px; color: var(--violet); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Gothic · 1100 — 1500 CE</div>
-      <div style="font-size: 16px; color: var(--slate-300); margin-top: 4px;">Engineering unlocks form. The flying buttress is proof <strong>engineering enables ambition.</strong></div>
-    </div>
-
-    <div style="margin-bottom: 32px; position: relative;">
-      <div style="position: absolute; left: -34px; width: 16px; height: 16px; background: var(--coral); border-radius: 50%;"></div>
-      <div style="font-size: 12px; color: var(--coral); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Industrial · 1760 — 1900</div>
-      <div style="font-size: 16px; color: var(--slate-300); margin-top: 4px;">Engineering confidence. <strong>Accidental beauty</strong> emerges from structural logic.</div>
-    </div>
-
-    <div style="margin-bottom: 32px; position: relative;">
-      <div style="position: absolute; left: -34px; width: 16px; height: 16px; background: var(--rose); border-radius: 50%;"></div>
-      <div style="font-size: 12px; color: var(--rose); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Modernism · 1919 — 1960s</div>
-      <div style="font-size: 16px; color: var(--slate-300); margin-top: 4px;">Function declared supreme. Applied too rigidly — <strong>dehumanising housing projects.</strong></div>
-    </div>
-
-    <div style="position: relative;">
-      <div style="position: absolute; left: -34px; width: 16px; height: 16px; background: var(--emerald); border-radius: 50%;"></div>
-      <div style="font-size: 12px; color: var(--emerald); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Contemporary · Today</div>
-      <div style="font-size: 16px; color: var(--slate-300); margin-top: 4px;">Digital tools raise both axes simultaneously. The debate moves to a <strong>higher level.</strong></div>
-    </div>
-  </div>
-
-  <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--electric-blue);">💬 DISCUSSION: Which era got the balance most right? What would it take to do better today?</div>
+  <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
+    <div class="card"><strong style="color: var(--electric-blue);">Ancient:</strong> Spiritual and structural purpose unified seamlessly.</div>
+    <div class="card"><strong style="color: var(--violet);">Gothic:</strong> Engineering breakthroughs expand aesthetic boundaries.</div>
+    <div class="card"><strong style="color: var(--coral);">Industrial:</strong> Structural efficiency creates a modern aesthetic.</div>
+    <div class="card"><strong style="color: var(--rose);">Modernist:</strong> Function prioritized above decorative tradition.</div>
   </div>
 </div>
 
-<!-- SLIDE 17: Section 03 Divider -->
-<div class="slide" data-slide="17" data-notes="SECTION 03 OPENER (20 min): 'Before we look at buildings that failed, let's agree on what SUCCESS looks like. These 8 priorities are your professional checklist.' Walk through each. Safety is non-negotiable. Lifecycle is 50-100 years. Maintenance: design for the person fixing it in 40 years.">
+<!-- SLIDE 17 -->
+<div class="slide" data-notes="SECTION 03 OPENER (20 min): The 8 Engineering Priorities.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">03</span>
       <span>Section 03 · 20 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">ENGINEERING<br>PRIORITIES</h1>
-    <p class="subtitle" style="font-size: 22px;">Eight non-negotiable dimensions every construction project must address — with real trade-off choices.</p>
+    <p class="subtitle" style="font-size: 22px;">Eight non-negotiable dimensions every construction project must address.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 3 of 10</div>
 </div>
 
-<!-- SLIDE 18: The 8 Engineering Priorities -->
-<div class="slide" data-slide="18" data-notes="THE 8 PRIORITIES (12 min): Walk through each with emphasis. 1. Safety — non-negotiable baseline. 2. Structural Performance — load, stress, deflection. 3. Sustainability — carbon, energy, lifecycle. 4. Cost Efficiency — budget is a boundary. 5. Constructability — can we actually build this? 6. User Experience — people must want to use it. 7. Lifecycle Performance — 50-100 year horizon. 8. Maintenance — design for the fixer in 40 years.">
+<!-- SLIDE 18 -->
+<div class="slide" data-notes="8 PRIORITIES (12 min): Detailed overview of criteria.">
   <div class="section-badge">
     <span class="section-number">📋</span>
-    <span>The 8 Engineering Priorities</span>
+    <span>The Checklist</span>
   </div>
-  <h2>Your Professional Checklist</h2>
+  <h2>The 8 Engineering Priorities</h2>
 
   <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
-    <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--rose); margin-bottom: 8px;">01</div>
-      <h4 style="color: var(--rose);">Safety</h4>
-      <p>Non-negotiable baseline. Zero compromise.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--coral);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--coral); margin-bottom: 8px;">02</div>
-      <h4 style="color: var(--coral);">Structural Performance</h4>
-      <p>Load, stress, deflection, resilience.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--emerald);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--emerald); margin-bottom: 8px;">03</div>
-      <h4 style="color: var(--emerald);">Sustainability</h4>
-      <p>Carbon, energy, materials lifecycle.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--amber);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--amber); margin-bottom: 8px;">04</div>
-      <h4 style="color: var(--amber);">Cost Efficiency</h4>
-      <p>Budget is a boundary condition.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--electric-blue);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--electric-blue); margin-bottom: 8px;">05</div>
-      <h4 style="color: var(--electric-blue);">Constructability</h4>
-      <p>Can we actually build this design?</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--violet);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--violet); margin-bottom: 8px;">06</div>
-      <h4 style="color: var(--violet);">User Experience</h4>
-      <p>People must want to use it.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--slate-300);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--slate-300); margin-bottom: 8px;">07</div>
-      <h4 style="color: var(--slate-300);">Lifecycle Performance</h4>
-      <p>50–100 year horizon. True total cost.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--slate-500);">
-      <div style="font-size: 32px; font-weight: 900; color: var(--slate-400); margin-bottom: 8px;">08</div>
-      <h4 style="color: var(--slate-400);">Maintenance</h4>
-      <p>Design for the person who fixes it in 40 years.</p>
-    </div>
+    <div class="card"><h4>01 Safety</h4><p>Non-negotiable baseline.</p></div>
+    <div class="card"><h4>02 Structural Performance</h4><p>Loads, stress, deflection.</p></div>
+    <div class="card"><h4>03 Sustainability</h4><p>Carbon and materials.</p></div>
+    <div class="card"><h4>04 Cost Efficiency</h4><p>Budget constraints.</p></div>
+    <div class="card"><h4>05 Constructability</h4><p>Feasibility of building.</p></div>
+    <div class="card"><h4>06 User Experience</h4><p>Human interaction.</p></div>
+    <div class="card"><h4>07 Lifecycle Value</h4><p>Long-term durability.</p></div>
+    <div class="card"><h4>08 Maintenance</h4><p>Ease of ongoing service.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 19: Quick Knowledge Check -->
-<div class="slide" data-slide="19" data-notes="QUIZ (3 min): 'Beat the Clock. 3 questions. 20 seconds each. No phones. No notes. Just your brain.' Q1: Form ever follows function — who coined it? (B: Louis Sullivan, 1896). Q2: Tacoma Narrows collapse cause? (C: Aerodynamic flutter). Q3: Lifecycle cost method? (C: Lifecycle Cost Assessment). Debrief: 'Question 2 connects to a bridge that fell.'">
+<!-- SLIDE 19 -->
+<div class="slide" data-notes="QUIZ (3 min): Interactive 3-question knowledge check.">
   <div class="section-badge">
     <span class="section-number">🏆</span>
-    <span>Beat the Clock · 3 Questions · 20s Each</span>
+    <span>Knowledge Check</span>
   </div>
-  <h2>Quick Knowledge Check</h2>
+  <h2>Beat the Clock</h2>
 
   <div class="quiz-container">
     <div id="quizContent">
@@ -1348,26 +1088,17 @@
         <div class="quiz-option" onclick="checkAnswer(this, false)">D. Le Corbusier, 1923</div>
       </div>
       <div class="quiz-explanation" id="quizExplanation">
-        <strong style="color: var(--emerald);">✓ Correct!</strong> Louis Sullivan coined "Form ever follows function" in 1896. Wright was his student who later said "Form and function are one."
+        <strong style="color: var(--emerald);">✓ Correct!</strong> Louis Sullivan coined the phrase in 1896.
       </div>
       <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-        <div style="font-size: 13px; color: var(--slate-400);">Question <span id="qNum">1</span> of 3</div>
         <button class="nav-btn" onclick="nextQuestion()">Next Question →</button>
       </div>
     </div>
   </div>
-
-  <div style="position: fixed; top: 24px; right: 24px;">
-    <div style="width: 80px; height: 80px; background: var(--coral); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <div style="font-size: 12px;">⏱️</div>
-      <div style="font-size: 24px; font-weight: 900;">20s</div>
-      <div style="font-size: 10px;">per Q</div>
-    </div>
-  </div>
 </div>
 
-<!-- SLIDE 20: Section 04 Divider -->
-<div class="slide" data-slide="20" data-notes="SECTION 04 OPENER (30 min): 'Theory is clean. Reality is messy. These 6 projects are your textbooks.' Pacing: Sydney 6min, Burj 5min+video, Millau 4min, Tacoma 8min+video, Bilbao 4min, NEOM 5min, Comparison 3min. Emotional arc: awe→pride→elegance→horror→excitement→curiosity.">
+<!-- SLIDE 20 -->
+<div class="slide" data-notes="SECTION 04 OPENER (30 min): Real World Case Studies.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">04</span>
@@ -1376,1143 +1107,548 @@
     <h1 style="font-size: 80px;">REAL-WORLD<br>CASE STUDIES</h1>
     <p class="subtitle" style="font-size: 22px;">Sydney Opera House · Burj Khalifa · Millau Viaduct · Tacoma Narrows · Guggenheim Bilbao · NEOM</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 4 of 10</div>
 </div>
 
-<!-- SLIDE 21: Sydney Opera House -->
-<div class="slide" data-slide="21" data-notes="SYDNEY OPERA HOUSE (6 min): 'The most photographed building in the Southern Hemisphere. And one of the most troubled construction projects in history.' Story arc: 1961 Utzon wins with sketches. No one knows how to build shells. 1966 government changes, Utzon forced out. Never returns. 1973 opens, 14x over budget, UNESCO World Heritage. Discussion: 'Was the human and financial cost justified?'">
+<!-- SLIDE 21 -->
+<div class="slide" data-notes="SYDNEY OPERA HOUSE (6 min): 14x over budget, timeless iconic landmark.">
   <div class="section-badge">
     <span class="section-number">🏛️</span>
-    <span>Case Study 01 · Beauty vs Engineering Complexity</span>
+    <span>Case Study 01</span>
   </div>
   <h2>Sydney Opera House</h2>
 
   <div class="case-study">
     <div class="case-info">
-      <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Jørn Utzon · Denmark · 1973</div>
       <div class="case-stats">
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--rose);">14×</div>
-          <div class="stat-label">Over Budget</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--rose);">4×</div>
-          <div class="stat-label">Time Overrun</div>
-        </div>
+        <div class="stat-box"><div class="stat-number" style="color: var(--rose);">14×</div><div class="stat-label">Over Budget</div></div>
+        <div class="stat-box"><div class="stat-number" style="color: var(--rose);">16 yrs</div><div class="stat-label">Duration</div></div>
       </div>
-      <p style="color: var(--slate-400); line-height: 1.6;"><strong style="color: var(--white);">$7M</strong> budgeted → <strong style="color: var(--rose);">$102M</strong> delivered<br>
-      <strong style="color: var(--white);">4 years</strong> planned → <strong style="color: var(--rose);">16 years</strong> actual</p>
-      <div style="margin-top: 16px; padding: 12px; background: rgba(56, 189, 248, 0.1); border-radius: 8px;">
-        <div style="font-size: 13px; color: var(--electric-blue);">💡 1961: Geometric breakthrough — shells derived from a single sphere</div>
-      </div>
+      <p style="color: var(--slate-400);">$7M original budget → $102M final cost. Iconic geometric shell structure.</p>
     </div>
-    <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(255,255,255,0.08);">
-      <div class="quote" style="border-left: none; padding-left: 0; font-size: 20px;">
-        "In this sense it has achieved one of the great aspirations of any public building: it has become a symbol of a city."
-        <div class="quote-author">— UNESCO, 2007</div>
-      </div>
+    <div class="case-info">
+      <h3>The Verdict</h3>
+      <p style="color: var(--slate-300);">A financial and management ordeal during construction, yet recognized globally as an architectural masterpiece.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 22: Sydney Opera House Engineering -->
-<div class="slide" data-slide="22" data-notes="SYDNEY ENGINEERING ANALYSIS (2 min): Three key lessons. 1. Never fix budget before design is constructable. 2. Constructability must be verified at concept stage — not during construction. 3. The result was a masterpiece — but was the human and financial cost justified? Ask the room: 'Would you have approved this project knowing the outcome?'">
+<!-- SLIDE 22 -->
+<div class="slide" data-notes="SYDNEY OPERA HOUSE ANALYSIS (2 min): Constructability challenges.">
   <div class="section-badge">
     <span class="section-number">🔍</span>
-    <span>Case Study 01 · Engineering Analysis</span>
+    <span>Sydney Analysis</span>
   </div>
-  <h2>The Engineering Ordeal</h2>
-
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 48px; font-weight: 900; color: var(--rose);">14×</div>
-      <h4 style="color: var(--rose);">Over Budget</h4>
-      <p>$7M → $102M AUD. The most expensive opera house ever built.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--amber);">
-      <div style="font-size: 48px; font-weight: 900; color: var(--amber);">4×</div>
-      <h4 style="color: var(--amber);">Time Overrun</h4>
-      <p>4 planned → 16 years. A generation of construction.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 36px; font-weight: 900; color: var(--rose);">1966</div>
-      <h4 style="color: var(--rose);">Utzon Resigned</h4>
-      <p>Never saw his building completed. Never returned to Australia.</p>
-    </div>
-  </div>
-
-  <div style="background: rgba(245, 158, 11, 0.05); border-left: 4px solid var(--amber); border-radius: 0 12px 12px 0; padding: 24px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--amber); margin-bottom: 12px;">🔑 Key Lessons</div>
-    <ol style="color: var(--slate-300); line-height: 2; padding-left: 20px;">
-      <li>Never fix the budget before the design is constructable.</li>
-      <li>Constructability must be verified at concept stage — not during construction.</li>
-      <li>The result was a masterpiece — but was the human and financial cost justified?</li>
-    </ol>
+  <h2>Constructability Lessons</h2>
+  <div class="card-grid">
+    <div class="card"><h4 style="color: var(--rose);">Early Cost Estimates</h4><p>Premature estimates before resolving structural geometry lead to massive overruns.</p></div>
+    <div class="card"><h4 style="color: var(--electric-blue);">Precast Innovation</h4><p>Spherical geometry solution allowed modular precast arch ribs.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 23: Burj Khalifa -->
-<div class="slide" data-slide="23" data-notes="BURJ KHALIFA (5 min): '828 meters. World's tallest. On budget. On time. The beautiful silhouette IS the structural engineering.' Explain buttressed core system — three wings around hexagonal core. Stepped, twisted form designed to confuse wind vortex shedding. Key lesson: Form co-designed with engineering from day one. This is what happens when form and function are developed together.">
+<!-- SLIDE 23 -->
+<div class="slide" data-notes="BURJ KHALIFA (5 min): 828m, buttressed core system.">
   <div class="section-badge">
     <span class="section-number">🏗️</span>
-    <span>Case Study 02 · Form Serving Function</span>
+    <span>Case Study 02</span>
   </div>
   <h2>Burj Khalifa</h2>
-
   <div class="case-study">
     <div class="case-info">
-      <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">SOM Architects · Dubai · 2010</div>
       <div class="case-stats">
-        <div class="stat-box">
-          <div class="stat-number">828m</div>
-          <div class="stat-label">World's Tallest</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--emerald);">✓</div>
-          <div class="stat-label">On Budget</div>
-        </div>
+        <div class="stat-box"><div class="stat-number">828m</div><div class="stat-label">Height</div></div>
+        <div class="stat-box"><div class="stat-number" style="color: var(--emerald);">On Budget</div><div class="stat-label">Status</div></div>
       </div>
-      <p style="color: var(--slate-400); line-height: 1.8;">• <strong style="color: var(--white);">Buttressed core system</strong> — three wings around hexagonal core<br>
-      • <strong style="color: var(--white);">Stepped, twisted form</strong> — designed to confuse wind vortex shedding<br>
-      • <strong style="color: var(--white);">Tapering profile</strong> — narrows to reduce wind load as height increases</p>
-    </div>
-    <div style="background: rgba(16, 185, 129, 0.05); border-radius: 16px; padding: 32px; border: 1px solid rgba(16, 185, 129, 0.2); display: flex; flex-direction: column; justify-content: center;">
-      <div style="font-size: 20px; font-weight: 700; color: var(--emerald); margin-bottom: 16px;">💡 Key Lesson</div>
-      <div class="quote" style="border-left-color: var(--emerald); font-size: 20px; margin: 0;">
-        The beautiful silhouette IS the structural engineering.
-      </div>
-      <div style="color: var(--slate-400); margin-top: 16px; font-size: 14px;">Form co-designed with engineering from day one. No trade-off was necessary because they were developed together.</div>
+      <p style="color: var(--slate-400);">Y-shaped floor plan minimizes wind vortex shedding while supporting immense gravity loads.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 24: Burj Khalifa Video Guide -->
-<div class="slide" data-slide="24" data-notes="VIDEO GUIDE (1 min): Before playing Burj Khalifa construction documentary, set up observation points. 'Watch for: the stepped Y-shaped floor plan changing as the building rises. The central hexagonal core and three wing buttress system. How tapering narrows the building profile.' After video: 'Why does the building taper and twist? Is this aesthetic or structural?'">
+<!-- SLIDE 24 -->
+<div class="slide" data-notes="BURJ KHALIFA VIDEO GUIDE (1 min): Aerodynamic stepping and core system.">
   <div class="section-badge">
     <span class="section-number">🎬</span>
-    <span>Video Viewing Guide · 60 Seconds</span>
+    <span>Video Guide</span>
   </div>
-  <h2>Burj Khalifa — Construction Process</h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px;">
-    <div>
-      <div style="font-size: 14px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Before You Watch — Observe:</div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>🔍 The Y-Shaped Plan</h4>
-        <p>How the stepped floor plan changes as the building rises</p>
-      </div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>🔍 The Core System</h4>
-        <p>The central hexagonal core and three wing buttress system</p>
-      </div>
-      <div class="card">
-        <h4>🔍 The Taper</h4>
-        <p>How tapering narrows the profile to reduce wind load</p>
-      </div>
-    </div>
-    <div>
-      <div style="font-size: 14px; color: var(--emerald); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Discussion After Viewing:</div>
-      <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.08);">
-        <ol style="color: var(--slate-300); line-height: 2; padding-left: 20px;">
-          <li>Why does the building taper and twist? Is this aesthetic or structural?</li>
-          <li>Where do you see form and function working together — or in tension?</li>
-          <li>Is this a triumph of form, function, or both? Give your reasoning.</li>
-        </ol>
-      </div>
-      <div style="margin-top: 16px; padding: 12px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; font-size: 13px; color: var(--electric-blue);">
-        🎬 Search: "Burj Khalifa construction documentary SOM" on YouTube
-      </div>
-    </div>
-  </div>
+  <h2>Burj Khalifa Engineering</h2>
+  <p class="subtitle">Observing structural stepping to confuse wind forces at extreme heights.</p>
 </div>
 
-<!-- SLIDE 25: Millau Viaduct -->
-<div class="slide" data-slide="25" data-notes="MILLAU VIADUCT (4 min): '343m — tallest cable-stayed mast, taller than the Eiffel Tower. On time and budget. Norman Foster and Michel Virlogeux.' Cable-stayed design chosen because it was structurally optimal for the site. 'The elegance was not added — it emerged from engineering necessity.' This is the gold standard: when the most efficient solution is also the most beautiful.">
+<!-- SLIDE 25 -->
+<div class="slide" data-notes="MILLAU VIADUCT (4 min): Structural efficiency yielding elegant aesthetic form.">
   <div class="section-badge">
     <span class="section-number">🌉</span>
-    <span>Case Study 03 · The Ideal Balance</span>
+    <span>Case Study 03</span>
   </div>
   <h2>Millau Viaduct</h2>
-
   <div class="case-study">
     <div class="case-info">
-      <div style="font-size: 11px; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Norman Foster & Michel Virlogeux · 2004</div>
       <div class="case-stats">
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--emerald);">343m</div>
-          <div class="stat-label">Tallest Mast</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--emerald);">✓</div>
-          <div class="stat-label">On Time & Budget</div>
-        </div>
+        <div class="stat-box"><div class="stat-number" style="color: var(--emerald);">343m</div><div class="stat-label">Max Height</div></div>
       </div>
-      <p style="color: var(--slate-400); line-height: 1.8;">• <strong style="color: var(--white);">Cable-stayed design</strong> — chosen because structurally optimal for the site<br>
-      • <strong style="color: var(--white);">Taller than the Eiffel Tower</strong> — yet appears to float<br>
-      • <strong style="color: var(--white);">Engineering elegance</strong> — not decoration, but efficiency made visible</p>
-    </div>
-    <div style="background: rgba(16, 185, 129, 0.05); border-radius: 16px; padding: 32px; border: 1px solid rgba(16, 185, 129, 0.2); display: flex; flex-direction: column; justify-content: center;">
-      <div class="quote" style="border-left-color: var(--emerald); font-size: 22px; margin: 0;">
-        "Elegance is not decoration. It is the visible expression of the most efficient structural solution."
-      </div>
-      <div style="color: var(--slate-400); margin-top: 16px; font-size: 14px;">The gold standard: when the most efficient solution is also the most beautiful.</div>
+      <p style="color: var(--slate-400);">Cable-stayed design designed by Norman Foster & Michel Virlogeux. Structural optimal layout creates natural elegance.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 26: Tacoma Narrows Video Guide -->
-<div class="slide" data-slide="26" data-notes="VIDEO GUIDE — TACOMA NARROWS (1 min): 'Before we watch, notice three things: the twisting motion — not just up and down, but torsion. How thin that deck is — an aesthetic choice. How FAST it goes from vibrating to collapsing.' This is the most important 60 seconds of video in engineering education.">
+<!-- SLIDE 26 -->
+<div class="slide" data-notes="TACOMA NARROWS VIDEO GUIDE (1 min): Aerodynamic instability.">
   <div class="section-badge">
     <span class="section-number">🎬</span>
-    <span>Real Failure Footage · 60 Seconds · November 7, 1940</span>
+    <span>Video Guide</span>
   </div>
-  <h2>Tacoma Narrows Bridge Collapse</h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px;">
-    <div>
-      <div style="font-size: 14px; color: var(--rose); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Before You Watch — Observe:</div>
-      <div class="card" style="margin-bottom: 12px; border-color: var(--rose);">
-        <h4 style="color: var(--rose);">🌪️ The Twisting Motion</h4>
-        <p>Not just vertical oscillation — <strong>torsional twisting</strong></p>
-      </div>
-      <div class="card" style="margin-bottom: 12px; border-color: var(--rose);">
-        <h4 style="color: var(--rose);">📏 The Slenderness</h4>
-        <p>The thin deck — <strong>an aesthetic decision</strong> that caused this</p>
-      </div>
-      <div class="card" style="border-color: var(--rose);">
-        <h4 style="color: var(--rose);">⚡ The Speed</h4>
-        <p>How fast structural failure escalates once it begins</p>
-      </div>
-    </div>
-    <div>
-      <div style="font-size: 14px; color: var(--amber); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Discussion Questions:</div>
-      <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.08);">
-        <ol style="color: var(--slate-300); line-height: 2; padding-left: 20px;">
-          <li>What design decision contributed most to this failure?</li>
-          <li>Was the bridge's aesthetic appearance related to why it failed?</li>
-          <li>What would you have done differently as the engineer in 1938?</li>
-        </ol>
-      </div>
-      <div style="margin-top: 16px; padding: 12px; background: rgba(244, 63, 94, 0.1); border-radius: 8px; font-size: 13px; color: var(--rose);">
-        🎬 Search: "Tacoma Narrows Bridge collapse 1940 original footage" on YouTube
-      </div>
-    </div>
-  </div>
+  <h2>Tacoma Narrows Bridge Failure</h2>
+  <p class="subtitle">Focus on torsional fluttering caused by a solid plate-girder deck.</p>
 </div>
 
-<!-- SLIDE 27: Tacoma Narrows Catastrophic Failure -->
-<div class="slide" data-slide="27" data-notes="TACOMA NARROWS FAILURE (4 min): Opened July 1940 — celebrated as 'the most beautiful bridge in the world.' Collapsed November 7, 1940 — just 4 months later in 40mph wind. Designer Moisseiff chose slender plate-girder deck partly for aesthetic reasons. Other engineers raised concerns and were dismissed. 'Galloping Gertie' is now studied in every engineering school worldwide as the defining example of aesthetics overriding aerodynamic analysis.">
+<!-- SLIDE 27 -->
+<div class="slide" data-notes="TACOMA NARROWS FAILURE (4 min): November 7, 1940 collapse analysis.">
   <div class="section-badge">
     <span class="section-number">💥</span>
-    <span>Case Study 04 · Catastrophic Failure</span>
+    <span>Case Study 04</span>
   </div>
-  <h2>Tacoma Narrows <span style="color: var(--rose);">"Galloping Gertie"</span></h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--rose); text-align: center;">
-      <div style="font-size: 48px; font-weight: 900; color: var(--rose);">4</div>
-      <div style="font-size: 14px; color: var(--slate-400);">Months from opening to collapse</div>
+  <h2>Tacoma Narrows Bridge</h2>
+  <div class="card-grid">
+    <div class="card" style="border-top: 3px solid var(--rose);">
+      <h4 style="color: var(--rose);">Slender Aesthetic Choice</h4>
+      <p>Shallow solid girders chosen for visual lightness caused unexpected aerodynamic flutter.</p>
     </div>
-    <div class="card" style="border-top: 3px solid var(--amber); text-align: center;">
-      <div style="font-size: 48px; font-weight: 900; color: var(--amber);">40</div>
-      <div style="font-size: 14px; color: var(--slate-400);">MPH wind speed at failure — not exceptional</div>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--rose); text-align: center;">
-      <div style="font-size: 48px; font-weight: 900; color: var(--rose);">0</div>
-      <div style="font-size: 14px; color: var(--slate-400);">Human deaths (one dog was the only casualty)</div>
-    </div>
-  </div>
-
-  <div style="background: rgba(244, 63, 94, 0.05); border-left: 4px solid var(--rose); border-radius: 0 12px 12px 0; padding: 24px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--rose); margin-bottom: 12px;">⚠️ The Fatal Decision</div>
-    <p style="color: var(--slate-300); line-height: 1.8;">Designer Moisseiff chose a <strong>slender plate-girder deck</strong> partly for aesthetic reasons — to create a "modern, graceful" appearance. Other engineers raised concerns about aerodynamic stability and were <strong>dismissed</strong>. "Galloping Gertie" is now studied in every engineering school worldwide as the defining example of <strong>aesthetics overriding aerodynamic analysis</strong>.</p>
   </div>
 </div>
 
-<!-- SLIDE 28: Tacoma Narrows Engineering Legacy -->
-<div class="slide" data-slide="28" data-notes="TACOMA LEGACY (3 min): Three lessons that changed engineering worldwide. 1. Wind Tunnel Testing — now mandatory for every major bridge deck. 2. Bridge Aerodynamics — new discipline created by this failure. Aeroelastic analysis now as carefully studied as static loads. 3. Open Lattice vs Plate Girder — replacement bridge used open lattice stiffening truss. Wind passes through rather than being caught. The professional lesson: 'Other engineers raised concerns and were dismissed. When you see a risk, you speak up. Always.'">
+<!-- SLIDE 28 -->
+<div class="slide" data-notes="TACOMA LEGACY (3 min): Wind tunnel testing becomes mandatory.">
   <div class="section-badge">
     <span class="section-number">📚</span>
-    <span>Tacoma Narrows · Engineering Legacy</span>
+    <span>Tacoma Legacy</span>
   </div>
-  <h2>Lessons That Changed Engineering <span class="gradient-text">Worldwide</span></h2>
-
-  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--electric-blue);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🌬️</div>
-      <h4 style="color: var(--electric-blue);">Wind Tunnel Testing — Mandatory</h4>
-      <p>Every major bridge deck section must now be tested in a wind tunnel before construction. This is <strong>law</strong>, not a recommendation.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--violet);">
-      <div style="font-size: 36px; margin-bottom: 12px;">📐</div>
-      <h4 style="color: var(--violet);">Bridge Aerodynamics — New Discipline</h4>
-      <p>Aeroelastic analysis was <strong>created by this failure</strong>. The interaction between wind and structure is now as carefully studied as static loads.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--emerald);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🌉</div>
-      <h4 style="color: var(--emerald);">Open Lattice vs. Plate Girder</h4>
-      <p>Replacement bridge (1950) used open lattice stiffening truss. Wind passes through rather than being caught. <strong>Function governed form.</strong></p>
-    </div>
-  </div>
-
-  <div style="background: rgba(245, 158, 11, 0.05); border-left: 4px solid var(--amber); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--amber);">⚠️ The Professional Lesson</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">Other engineers raised concerns about slenderness and were dismissed. <strong>When you see a risk, you speak up. Always.</strong></div>
-  </div>
+  <h2>Engineering Standard Shift</h2>
+  <div class="card"><p>Dynamic wind analysis and wind tunnel testing were permanently integrated into long-span bridge engineering protocols.</p></div>
 </div>
 
-<!-- SLIDE 29: Guggenheim Bilbao -->
-<div class="slide" data-slide="29" data-notes="GUGGENHEIM BILBAO (4 min): '$100M cost → ~$500M economic return within 3 years. 2.5M visitors annually.' CATIA aerospace software used to model titanium-clad geometry. Gehry's complex form made buildable by SOM structural engineers. Discussion: 'The Bilbao Effect — a 5:1 economic return. Does that justify the aesthetic complexity? If cities can prosper through iconic architecture, should function always come first?'">
+<!-- SLIDE 29 -->
+<div class="slide" data-notes="GUGGENHEIM BILBAO (4 min): The Bilbao effect and economic impact.">
   <div class="section-badge">
     <span class="section-number">🎨</span>
-    <span>Case Study 05 · The Bilbao Effect</span>
+    <span>Case Study 05</span>
   </div>
   <h2>Guggenheim Bilbao</h2>
-
   <div class="case-study">
     <div class="case-info">
-      <div style="font-size: 11px; color: var(--violet); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Frank Gehry · Bilbao, Spain · 1997</div>
       <div class="case-stats">
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--emerald);">5:1</div>
-          <div class="stat-label">Economic Return</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number" style="color: var(--violet);">2.5M</div>
-          <div class="stat-label">Annual Visitors</div>
-        </div>
+        <div class="stat-box"><div class="stat-number" style="color: var(--emerald);">5:1</div><div class="stat-label">Return Ratio</div></div>
       </div>
-      <p style="color: var(--slate-400); line-height: 1.8;">• <strong style="color: var(--white);">$100M cost</strong> → ~$500M economic return within 3 years<br>
-      • <strong style="color: var(--white);">CATIA aerospace software</strong> used to model titanium-clad geometry<br>
-      • <strong style="color: var(--white);">SOM structural engineers</strong> made Gehry's complex form buildable</p>
-    </div>
-    <div style="background: rgba(139, 92, 246, 0.05); border-radius: 16px; padding: 32px; border: 1px solid rgba(139, 92, 246, 0.2); display: flex; flex-direction: column; justify-content: center;">
-      <div style="font-size: 20px; font-weight: 700; color: var(--violet); margin-bottom: 16px;">💬 The Bilbao Effect</div>
-      <div class="quote" style="border-left-color: var(--violet); font-size: 18px; margin: 0;">
-        A 5:1 economic return — does that justify the aesthetic complexity? If cities can prosper through iconic architecture, should function always come first?
-      </div>
+      <p style="color: var(--slate-400);">Frank Gehry design engineered using CATIA software. Iconic sculptural form catalyzed citywide urban renewal.</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 30: NEOM The Line -->
-<div class="slide" data-slide="30" data-notes="NEOM THE LINE (5 min): 'The most debated project of our era. $500 billion. 170km long. 200m wide. 500m tall. 9 million residents. Zero cars. Zero streets. 100% renewable.' The core debate: Is this a visionary engineering breakthrough or the world's most expensive architectural concept? Present both sides fairly. Don't dismiss it — but don't ignore the unanswered questions either.">
+<!-- SLIDE 30 -->
+<div class="slide" data-notes="NEOM THE LINE (5 min): $500B hyper-structure debate.">
   <div class="section-badge">
     <span class="section-number">🌆</span>
-    <span>Case Study 06 · The Most Debated Project of Our Era</span>
+    <span>Case Study 06</span>
   </div>
-  <h2>NEOM — <span class="gradient-text">The Line</span></h2>
-
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px;">
-    <div class="stat-box">
-      <div class="stat-number" style="color: var(--electric-blue);">$500B</div>
-      <div class="stat-label">Investment</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" style="color: var(--electric-blue);">170km</div>
-      <div class="stat-label">Length</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" style="color: var(--electric-blue);">500m</div>
-      <div class="stat-label">Height</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" style="color: var(--electric-blue);">9M</div>
-      <div class="stat-label">Residents</div>
-    </div>
-  </div>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;">
-    <div class="card" style="border-left: 3px solid var(--emerald);">
-      <h4 style="color: var(--emerald);">✅ The Vision Argument</h4>
-      <p style="color: var(--slate-400);">If you eliminate cars entirely and start from zero, you get a fundamentally different city. The form IS the function — a walkable vertical ecosystem.</p>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--rose);">
-      <h4 style="color: var(--rose);">⚠️ The Engineering Reality</h4>
-      <p style="color: var(--slate-400);">No structure remotely similar has ever been built. Wind loads on a 170km × 500m mirror-glass wall are unprecedented. No engineering code covers this scale.</p>
-    </div>
-  </div>
-
-  <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px; margin-top: 24px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--electric-blue);">💬 Is NEOM the ultimate proof that form and function can be one — or the ultimate example of form overwhelming all engineering reality?</div>
+  <h2>NEOM — The Line</h2>
+  <div class="card-grid">
+    <div class="card"><h4>170 km Length</h4><p>Linear mirrored urban concept.</p></div>
+    <div class="card"><h4>500 m Height</h4><p>Unprecedented structural scale.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 31: NEOM Engineering Analysis -->
-<div class="slide" data-slide="31" data-notes="NEOM ENGINEERING (3 min): Three unanswered questions. 1. Natural Light — 200m-wide, 500m-tall enclosed city means internal levels receive zero direct sunlight. Artificial lighting at enormous scale. 2. Emergency Services — zero roads means zero fire trucks. Emergency response in a linear city of 9 million requires entirely new systems. 3. Structural Scale — no engineering code covers this. Wind loads are unprecedented. Present both sides. Don't mock the ambition — but don't ignore the risks.">
+<!-- SLIDE 31 -->
+<div class="slide" data-notes="NEOM ANALYSIS (3 min): Wind, light, logistics questions.">
   <div class="section-badge">
     <span class="section-number">🔍</span>
-    <span>NEOM · Engineering Analysis</span>
+    <span>NEOM Analysis</span>
   </div>
-  <h2>The Engineering Questions <span style="color: var(--rose);">Nobody Has Answered</span></h2>
-
-  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--amber);">
-      <div style="font-size: 36px; margin-bottom: 12px;">☀️</div>
-      <h4 style="color: var(--amber);">Natural Light</h4>
-      <p>A 200m-wide, 500m-tall enclosed city means internal levels receive <strong style="color: var(--rose);">zero direct sunlight</strong>. Artificial lighting at enormous scale must substitute entirely.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🚒</div>
-      <h4 style="color: var(--rose);">Emergency Services</h4>
-      <p>Zero roads means <strong style="color: var(--rose);">zero fire trucks</strong>. Emergency response in a 200m-wide linear city of 9 million requires entirely new systems that do not yet exist.</p>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--coral);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🏗️</div>
-      <h4 style="color: var(--coral);">Structural Scale</h4>
-      <p>No structure remotely similar has ever been built. Wind loads on a 170km × 500m mirror-glass wall are <strong style="color: var(--rose);">unprecedented</strong>. No engineering code covers this scale.</p>
-    </div>
-  </div>
-
-  <div style="background: rgba(139, 92, 246, 0.05); border-left: 4px solid var(--violet); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--violet);">🔮 The Vision Argument</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">If you eliminate cars entirely and start from zero, you get a fundamentally different city. Defenders say <strong>the form IS the function</strong> — a walkable vertical ecosystem.</div>
+  <h2>Unresolved Engineering Questions</h2>
+  <div class="card-grid">
+    <div class="card"><h4 style="color: var(--amber);">Wind Loads</h4><p>Continuous 500m wall effects.</p></div>
+    <div class="card"><h4 style="color: var(--amber);">Internal Microclimate</h4><p>Sunlight distribution & airflow.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 32: Five Projects Compared -->
-<div class="slide" data-slide="32" data-notes="COMPARISON DASHBOARD (3 min): Walk through the table. Pattern: projects where form and function were co-designed from the start succeeded. Where they competed, problems multiplied. Sydney: beauty without constructability = disaster. Burj: form co-designed with engineering. Millau: elegance IS efficiency. Tacoma: slenderness for aesthetics = fatal. Bilbao: iconic form transformed economy. NEOM: most extreme form-led project — engineering still unresolved.">
+<!-- SLIDE 32 -->
+<div class="slide" data-notes="COMPARISON TABLE (3 min): Summary of projects.">
   <div class="section-badge">
     <span class="section-number">📊</span>
-    <span>Five Projects Compared</span>
+    <span>Project Summary</span>
   </div>
-  <h2>The Pattern Emerges</h2>
+  <h2>Cross-Case Analysis</h2>
 
   <table class="comparison-table">
     <thead>
       <tr>
         <th>Project</th>
-        <th>Form</th>
-        <th>Function</th>
-        <th>Budget</th>
-        <th>Key Lesson</th>
+        <th>Form Rating</th>
+        <th>Function Rating</th>
+        <th>Key Outcome</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><strong>Sydney Opera House</strong></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td><span class="rating">★★★☆☆</span></td>
-        <td style="color: var(--rose);">14× over</td>
-        <td>Beauty without constructability = disaster</td>
-      </tr>
-      <tr>
-        <td><strong>Burj Khalifa</strong></td>
-        <td><span class="rating">★★★★☆</span></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td style="color: var(--emerald);">On target</td>
-        <td>Form co-designed with engineering from day one</td>
-      </tr>
-      <tr>
-        <td><strong>Millau Viaduct</strong></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td style="color: var(--emerald);">On budget</td>
-        <td>Elegance IS engineering efficiency here</td>
-      </tr>
-      <tr>
-        <td><strong>Tacoma Narrows</strong></td>
-        <td><span class="rating">★★★☆☆</span></td>
-        <td><span class="rating">★☆☆☆☆</span></td>
-        <td style="color: var(--rose);">Collapsed</td>
-        <td>Slenderness chosen for aesthetics — fatal aerodynamics</td>
-      </tr>
-      <tr>
-        <td><strong>Guggenheim Bilbao</strong></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td><span class="rating">★★★★☆</span></td>
-        <td style="color: var(--amber);">Moderate</td>
-        <td>Iconic form can transform an entire city's economy</td>
-      </tr>
-      <tr>
-        <td><strong>NEOM — The Line</strong></td>
-        <td><span class="rating">★★★★★</span></td>
-        <td><span class="rating">★★☆☆☆</span></td>
-        <td style="color: var(--rose);">$500B+</td>
-        <td>Most extreme form-led project — engineering still unresolved</td>
-      </tr>
+      <tr><td>Sydney Opera House</td><td>★★★★★</td><td>★★★☆☆</td><td>Iconic / High Overrun</td></tr>
+      <tr><td>Burj Khalifa</td><td>★★★★☆</td><td>★★★★★</td><td>Tallest / Co-designed</td></tr>
+      <tr><td>Millau Viaduct</td><td>★★★★★</td><td>★★★★★</td><td>Optimal Efficiency</td></tr>
+      <tr><td>Tacoma Narrows</td><td>★★★☆☆</td><td>★☆☆☆☆</td><td>Aerodynamic Failure</td></tr>
+      <tr><td>Guggenheim Bilbao</td><td>★★★★★</td><td>★★★★☆</td><td>Economic Transformation</td></tr>
     </tbody>
   </table>
-
-  <div style="background: rgba(16, 185, 129, 0.05); border-left: 4px solid var(--emerald); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 24px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--emerald);">📌 Pattern</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">Projects where form and function were <strong>co-designed from the start</strong> succeeded. Where they competed, problems multiplied.</div>
-  </div>
 </div>
 
-<!-- SLIDE 33: Section 05 Divider -->
-<div class="slide" data-slide="33" data-notes="SECTION 05 OPENER (10 min): 'These buildings didn't just fail. They killed people. And in every case, someone KNEW there was a problem.' Tone shift: serious. Lower voice. Slow pace. Tacoma: wind tunnel testing is now LAW because of this. Hyatt Regency: 114 people died because a design change wasn't re-analyzed. Engineers lost licenses. Ronan Point: one gas explosion, progressive collapse.">
+<!-- SLIDE 33 -->
+<div class="slide" data-notes="SECTION 05 OPENER (10 min): Disasters when function was neglected.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">05</span>
       <span>Section 05 · 10 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">WHEN FUNCTION<br>WAS IGNORED</h1>
-    <p class="subtitle" style="font-size: 22px;">Engineering disasters caused by design decisions that prioritised form, economy, or convenience over fundamental structural requirements.</p>
+    <p class="subtitle" style="font-size: 22px;">Structural failures and design oversights.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 5 of 10</div>
 </div>
 
-<!-- SLIDE 34: Famous Engineering Disasters -->
-<div class="slide" data-slide="34" data-notes="DISASTERS OVERVIEW (4 min): Three cases. Tacoma Narrows — slender aesthetic deck ignored aerodynamic flutter. Collapsed in 40mph wind, 4 months after opening. Priority neglected: Structural Performance. Hyatt Regency — design change during construction doubled connection loads. 114 killed. Engineers lost licenses. Priority neglected: Safety. Ronan Point — gas explosion in one flat caused progressive collapse. Connections not designed for horizontal loads. Priority neglected: Structural Robustness. Discussion: 'In each case, the failure was predictable. What systems should have caught these?'">
+<!-- SLIDE 34 -->
+<div class="slide" data-notes="DISASTERS OVERVIEW (4 min): Hyatt Regency, Ronan Point, Tacoma.">
   <div class="section-badge">
     <span class="section-number">⚠️</span>
-    <span>Famous Engineering Disasters</span>
+    <span>Critical Failures</span>
   </div>
-  <h2>When <span style="color: var(--rose);">Function</span> Was Ignored</h2>
-
-  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
+  <h2>Major Structural Failures</h2>
+  <div class="card-grid">
     <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Tacoma Narrows Bridge</div>
-      <div style="font-size: 13px; color: var(--slate-400); margin-bottom: 12px;">Washington, USA · 1940</div>
-      <p>Slender aesthetic deck ignored aerodynamic flutter. Collapsed in 40mph wind, just 4 months after opening.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(244, 63, 94, 0.1); border-radius: 6px; font-size: 12px; color: var(--rose);">Priority neglected: Structural Performance (02)</div>
+      <h4 style="color: var(--rose);">Hyatt Regency Walkways</h4>
+      <p>Kansas City (1981). Connection detail altered during shop drawing phase. 114 fatalities.</p>
     </div>
     <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Hyatt Regency Walkways</div>
-      <div style="font-size: 13px; color: var(--slate-400); margin-bottom: 12px;">Kansas City, USA · 1981</div>
-      <p>A design change during construction doubled connection loads. 114 killed. Engineers lost their professional licences.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(244, 63, 94, 0.1); border-radius: 6px; font-size: 12px; color: var(--rose);">Priority neglected: Safety (01)</div>
+      <h4 style="color: var(--rose);">Ronan Point</h4>
+      <p>London (1968). Progressive collapse caused by lack of structural redundancy.</p>
     </div>
-    <div class="card" style="border-top: 3px solid var(--rose);">
-      <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Ronan Point Tower</div>
-      <div style="font-size: 13px; color: var(--slate-400); margin-bottom: 12px;">London, UK · 1968</div>
-      <p>Gas explosion in one flat caused progressive collapse of an entire tower corner. Connections not designed for horizontal loads.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(244, 63, 94, 0.1); border-radius: 6px; font-size: 12px; color: var(--rose);">Priority neglected: Structural Robustness (02)</div>
-    </div>
-  </div>
-
-  <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600; color: var(--electric-blue);">💬 Discussion: In each case, the failure was predictable. What systems should have caught these before construction?</div>
   </div>
 </div>
 
-<!-- SLIDE 35: Hyatt Regency Detailed Analysis -->
-<div class="slide" data-slide="35" data-notes="HYATT REGENCY DEEP DIVE (4 min): What happened — July 17, 1981. 2,000 tea-dance guests below. Two suspended walkways collapsed. 114 killed, 216 injured. The design change — contractor changed single-rod suspension to two rods. Appeared equivalent. But it doubled the load on 4th-floor box-beam connections. The engineering failure — structural engineers signed shop drawings without re-analysing revised connection loads. This was the critical professional failure. The consequence — engineers Jack Gillum and Daniel Duncan lost their professional licences. Shop drawing review is now a defining topic in every engineering ethics course.">
+<!-- SLIDE 35 -->
+<div class="slide" data-notes="HYATT REGENCY ANALYSIS (4 min): Detail of double-rod connection change.">
   <div class="section-badge">
     <span class="section-number">🔍</span>
-    <span>Engineering Disaster · Detailed Analysis</span>
+    <span>Deep Dive</span>
   </div>
-  <h2>Hyatt Regency Walkway <span style="color: var(--rose);">Collapse</span></h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;">
-    <div class="card" style="border-left: 3px solid var(--rose);">
-      <h4 style="color: var(--rose);">💥 What Happened</h4>
-      <p style="color: var(--slate-400);">Kansas City · July 17, 1981 · 2,000 tea-dance guests below. Two suspended walkways collapsed. <strong style="color: var(--rose);">114 killed · 216 injured.</strong></p>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--amber);">
-      <h4 style="color: var(--amber);">🔧 The Design Change</h4>
-      <p style="color: var(--slate-400);">Contractor changed single-rod suspension to two rods. Appeared equivalent. But it <strong style="color: var(--amber);">doubled the load</strong> on the 4th-floor box-beam connections.</p>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--rose);">
-      <h4 style="color: var(--rose);">⚠️ The Engineering Failure</h4>
-      <p style="color: var(--slate-400);">Structural engineers signed the shop drawings <strong style="color: var(--rose);">without re-analysing</strong> the revised connection loads. This was the critical professional failure.</p>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--violet);">
-      <h4 style="color: var(--violet);">⚖️ The Professional Consequence</h4>
-      <p style="color: var(--slate-400);">Engineers Jack Gillum and Daniel Duncan <strong style="color: var(--violet);">lost their professional licences</strong>. Shop drawing review is now a defining topic in every engineering ethics course.</p>
-    </div>
-  </div>
+  <h2>Hyatt Regency Connection Detail</h2>
+  <div class="card"><p>Replacing a continuous support rod with two separate rods doubled the load placed on the upper beam box joint, leading to connection shear failure.</p></div>
 </div>
 
-<!-- SLIDE 36: Myth vs Reality -->
-<div class="slide" data-slide="36" data-notes="MYTH VS REALITY (6 min): Interactive 'tap to reveal' cards. Click each MYTH card to reveal REALITY. Build suspense — don't reveal all at once. Ask audience to predict before clicking. Card 1: Aesthetics always increases costs? REALITY: Millau and Burj were on budget. Elegance can emerge from efficiency. Card 2: Beautiful buildings must be safe? REALITY: Tacoma Narrows was called 'most beautiful bridge.' Beauty doesn't guarantee safety. Card 3: Engineering and architecture incompatible? REALITY: Every great project requires both. Card 4: Technology solved the conflict? REALITY: Tools help, but judgment is still required. NEOM proves digital tools don't eliminate risk.">
+<!-- SLIDE 36 -->
+<div class="slide" data-notes="MYTH VS REALITY (6 min): Click cards to reveal facts.">
   <div class="section-badge">
     <span class="section-number">🎭</span>
-    <span>Myth vs Reality · Tap Each Card to Reveal</span>
+    <span>Myth vs Reality</span>
   </div>
-  <h2>Common Misconceptions</h2>
+  <h2>Interactive Cards (Click to Reveal)</h2>
 
-  <div class="card-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 32px;">
+  <div class="card-grid">
     <div class="myth-card" onclick="this.classList.toggle('revealed')">
       <div class="myth-front">
         <div class="myth-label myth">MYTH</div>
-        <h4 style="color: var(--rose);">"Prioritising aesthetics always increases construction costs."</h4>
-        <div style="color: var(--slate-400); font-size: 13px; margin-top: 12px;">Tap to reveal →</div>
+        <h4>"Aesthetics always increase costs."</h4>
       </div>
       <div class="myth-back">
         <div class="myth-label reality">REALITY</div>
-        <h4 style="color: var(--emerald);">Elegance can emerge from efficiency.</h4>
-        <p style="color: var(--slate-400); font-size: 14px; margin-top: 8px;">Millau Viaduct was on budget. Burj Khalifa was on budget. The most efficient structural solution is often the most beautiful.</p>
+        <h4 style="color: var(--emerald);">Structural efficiency yields natural beauty.</h4>
+        <p style="color: var(--slate-400); margin-top: 8px;">Millau Viaduct stayed within budget while delivering landmark visuals.</p>
       </div>
     </div>
     <div class="myth-card" onclick="this.classList.toggle('revealed')">
       <div class="myth-front">
         <div class="myth-label myth">MYTH</div>
-        <h4 style="color: var(--rose);">"A beautiful building must be safe — good design accounts for everything."</h4>
-        <div style="color: var(--slate-400); font-size: 13px; margin-top: 12px;">Tap to reveal →</div>
+        <h4>"Iconic forms guarantee safety."</h4>
       </div>
       <div class="myth-back">
         <div class="myth-label reality">REALITY</div>
-        <h4 style="color: var(--emerald);">Beauty does not guarantee safety.</h4>
-        <p style="color: var(--slate-400); font-size: 14px; margin-top: 8px;">Tacoma Narrows was called "the most beautiful bridge in the world." It collapsed 4 months later. Good looks ≠ good engineering.</p>
-      </div>
-    </div>
-    <div class="myth-card" onclick="this.classList.toggle('revealed')">
-      <div class="myth-front">
-        <div class="myth-label myth">MYTH</div>
-        <h4 style="color: var(--rose);">"Engineering and architecture are fundamentally incompatible."</h4>
-        <div style="color: var(--slate-400); font-size: 13px; margin-top: 12px;">Tap to reveal →</div>
-      </div>
-      <div class="myth-back">
-        <div class="myth-label reality">REALITY</div>
-        <h4 style="color: var(--emerald);">Every great project requires both.</h4>
-        <p style="color: var(--slate-400); font-size: 14px; margin-top: 8px;">The best engineers appreciate aesthetics. The best architects understand structure. The divide is cultural, not technical.</p>
-      </div>
-    </div>
-    <div class="myth-card" onclick="this.classList.toggle('revealed')">
-      <div class="myth-front">
-        <div class="myth-label myth">MYTH</div>
-        <h4 style="color: var(--rose);">"Modern technology has solved the form-function conflict permanently."</h4>
-        <div style="color: var(--slate-400); font-size: 13px; margin-top: 12px;">Tap to reveal →</div>
-      </div>
-      <div class="myth-back">
-        <div class="myth-label reality">REALITY</div>
-        <h4 style="color: var(--emerald);">Tools help, but judgment is still required.</h4>
-        <p style="color: var(--slate-400); font-size: 14px; margin-top: 8px;">NEOM has every digital tool available. The engineering questions are still unanswered. Technology raises the ceiling — humans still decide.</p>
+        <h4 style="color: var(--emerald);">Aesthetics do not replace physical verification.</h4>
+        <p style="color: var(--slate-400); margin-top: 8px;">Rigorous dynamic and static load analysis remains imperative.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 37: Section 06 Divider -->
-<div class="slide" data-slide="37" data-notes="SECTION 06 OPENER (10 min): 'These buildings didn't fall down. They just made life miserable for everyone around them.' Three cases: Walkie Talkie — concave glass facade acted as parabolic mirror, melting cars. Denver Airport — iconic tensile roof leaked chronically, permanent repair crew for years. Vdara Hotel — curved glass reflected concentrated solar energy onto pool deck, singeing hair. Common thread: visually striking concepts were not adequately analysed for real-world physical behaviour.">
+<!-- SLIDE 37 -->
+<div class="slide" data-notes="SECTION 06 OPENER (10 min): Functional nuisances.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">06</span>
       <span>Section 06 · 10 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">ICONIC.<br>BUT PROBLEMATIC.</h1>
-    <p class="subtitle" style="font-size: 22px;">Projects that did not collapse — but where form created serious, costly, long-term problems.</p>
+    <p class="subtitle" style="font-size: 22px;">Structures that stayed standing, but created severe functional issues.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 6 of 10</div>
 </div>
 
-<!-- SLIDE 38: Projects That Struggled -->
-<div class="slide" data-slide="38" data-notes="THREE PROBLEMATIC PROJECTS (5 min): Walkie Talkie — 20 Fenchurch St, London, 2014. Concave glass facade acted as parabolic mirror — concentrating sunlight to melt car bodywork. Fix: permanent sunshade retrofitted. Won architecture awards despite the failure. Denver Airport — iconic white tensile fabric roof resembling snow-capped mountains leaked chronically. Permanent leak repair crew stationed for years. Roof sections later replaced. Vdara Hotel, Las Vegas — curved glass south facade reflected concentrated solar energy onto pool deck. Intense enough to singe guests' hair and melt plastic. Hedges installed as solar shield. Problem reportedly persists. Common thread: visually striking concepts were not adequately analysed for real-world physical behaviour at design stage.">
+<!-- SLIDE 38 -->
+<div class="slide" data-notes="PROBLEMATIC PROJECTS (5 min): Walkie Talkie, Vdara Hotel.">
   <div class="section-badge">
     <span class="section-number">⚠️</span>
-    <span>Projects That Struggled Because Form Overpowered Function</span>
+    <span>Unintended Consequences</span>
   </div>
-  <h2>When Beauty <span style="color: var(--rose);">Backfired</span></h2>
-
-  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--amber);">
-      <div style="font-size: 11px; color: var(--amber); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">The "Walkie Talkie" · London · 2014</div>
-      <h4 style="color: var(--amber);">20 Fenchurch Street</h4>
-      <p>Concave glass facade acted as a <strong style="color: var(--rose);">parabolic mirror</strong> — concentrating sunlight to melt car bodywork on surrounding streets.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(245, 158, 11, 0.1); border-radius: 6px; font-size: 12px; color: var(--amber);">Fix: Permanent sunshade retrofitted</div>
+  <h2>Solar Reflection Issues</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h4 style="color: var(--amber);">20 Fenchurch ("Walkie Talkie")</h4>
+      <p>Concave glass facade focused solar energy to street level, causing heat damage to vehicles.</p>
     </div>
-    <div class="card" style="border-top: 3px solid var(--electric-blue);">
-      <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Denver Airport Roof · 1995</div>
-      <h4 style="color: var(--electric-blue);">Iconic but Leaking</h4>
-      <p>Iconic white tensile fabric roof (resembling snow-capped mountains) <strong style="color: var(--rose);">leaked chronically</strong>. A permanent leak repair crew was stationed for years.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-radius: 6px; font-size: 12px; color: var(--electric-blue);">Fix: Roof sections replaced with conventional materials</div>
+    <div class="card">
+      <h4 style="color: var(--coral);">Vdara Hotel Las Vegas</h4>
+      <p>Curved facade reflections produced concentrated heat zones on pool decks.</p>
     </div>
-    <div class="card" style="border-top: 3px solid var(--coral);">
-      <div style="font-size: 11px; color: var(--coral); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Vdara Hotel · Las Vegas · 2009</div>
-      <h4 style="color: var(--coral);">The "Death Ray"</h4>
-      <p>Curved glass south facade reflected <strong style="color: var(--rose);">concentrated solar energy</strong> onto the pool deck — intense enough to singe guests' hair and melt plastic.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(249, 115, 22, 0.1); border-radius: 6px; font-size: 12px; color: var(--coral);">Fix: Hedges installed as solar shield</div>
-    </div>
-  </div>
-
-  <div style="background: rgba(244, 63, 94, 0.05); border-left: 4px solid var(--rose); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--rose);">🔗 Common Thread</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">Visually striking concepts were <strong>not adequately analysed for real-world physical behaviour</strong> at design stage.</div>
   </div>
 </div>
 
-<!-- SLIDE 39: Audience Vote — Walkie Talkie -->
-<div class="slide" data-slide="39" data-notes="AUDIENCE VOTE (5 min): Use Mentimeter/Slido. Code: WALKIE2024. Context: 'This building won architecture awards. Generates millions in rent. And melts cars. The concave form WAS modelled. The solar reflection was NOT.' Voting prompt: 'You are the planning authority in 2008. The architect shows you this design. The solar analysis says no issues. Do you approve?' Debrief by answer: YES — what risk level is acceptable? NO — how many great buildings would we lose? CONDITIONALLY — what conditions? Key learning: The Walkie Talkie didn't fail structurally. It failed PHYSICALLY in ways no one modelled. Form created an unintended function — a death ray.">
+<!-- SLIDE 39 -->
+<div class="slide" data-notes="WALKIE TALKIE VOTE (5 min): Audience decision on risk management.">
   <div class="section-badge">
     <span class="section-number">⚖️</span>
-    <span>Audience Vote · The Walkie Talkie, London</span>
+    <span>Design Evaluation</span>
   </div>
-  <h2>Would you approve this project <span class="gradient-text">today?</span></h2>
-  <p class="subtitle">Architecturally iconic. Significant rental income. Multiple design awards. And — concentrates sunlight to melt cars. The concave form was modelled before construction.</p>
-
-  <div class="poll-container" style="max-width: 100%; margin-top: 24px;">
-    <div class="poll-options" style="flex-direction: row; gap: 16px;">
-      <div class="poll-option" style="flex: 1; justify-content: center;" onclick="selectPollOption(this, 'YES')">
-        <div class="poll-letter" style="background: var(--emerald);">✓</div>
-        <span>YES — Approve</span>
-      </div>
-      <div class="poll-option" style="flex: 1; justify-content: center;" onclick="selectPollOption(this, 'NO')">
-        <div class="poll-letter" style="background: var(--rose);">✗</div>
-        <span>NO — Reject</span>
-      </div>
-      <div class="poll-option" style="flex: 1; justify-content: center;" onclick="selectPollOption(this, 'MAYBE')">
-        <div class="poll-letter" style="background: var(--amber);">?</div>
-        <span>Conditionally</span>
-      </div>
-    </div>
-  </div>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px;">
-    <div style="background: rgba(16, 185, 129, 0.05); border-radius: 12px; padding: 16px;">
-      <div style="font-size: 13px; font-weight: 700; color: var(--emerald); margin-bottom: 8px;">If YES:</div>
-      <div style="font-size: 13px; color: var(--slate-400);">What level of risk is acceptable for iconic architecture?</div>
-    </div>
-    <div style="background: rgba(244, 63, 94, 0.05); border-radius: 12px; padding: 16px;">
-      <div style="font-size: 13px; font-weight: 700; color: var(--rose); margin-bottom: 8px;">If NO:</div>
-      <div style="font-size: 13px; color: var(--slate-400);">How many great buildings would we lose if we rejected every risk?</div>
-    </div>
-    <div style="background: rgba(245, 158, 11, 0.05); border-radius: 12px; padding: 16px;">
-      <div style="font-size: 13px; font-weight: 700; color: var(--amber); margin-bottom: 8px;">If Conditional:</div>
-      <div style="font-size: 13px; color: var(--slate-400);">What conditions? Solar study? Insurance? Performance bond?</div>
+  <h2>How Should Unintended Environmental Effects Be Managed?</h2>
+  <div class="poll-container">
+    <div class="poll-options">
+      <div class="poll-option" onclick="selectPollOption(this)"><span>Mandatory microclimate computer modeling prior to approval</span></div>
+      <div class="poll-option" onclick="selectPollOption(this)"><span>Financial indemnity bonds required from developer</span></div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 40: Section 07 Divider -->
-<div class="slide" data-slide="40" data-notes="SECTION 07 OPENER (15 min): 'For the next 15 minutes, there are no right answers. Only better arguments.' Room setup: Left side = Team A (Aesthetics), Right side = Team B (Performance). Debate format: 3 min prep per team, 3 min opening each, 2 min rebuttal each, 3 min audience Q&A, 2 min final vote. Judging criteria: use of evidence, acknowledgment of other side, real-world applicability. Facilitation tips: if one side dominates, play devil's advocate.">
+<!-- SLIDE 40 -->
+<div class="slide" data-notes="SECTION 07 OPENER (15 min): Interactive Debate.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">07</span>
       <span>Section 07 · 15 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">TAKE A SIDE.<br>DEFEND IT.</h1>
-    <p class="subtitle" style="font-size: 22px;">Now you argue. 3 minutes to prepare · 3-minute opening each · 2-minute rebuttal each.</p>
+    <p class="subtitle" style="font-size: 22px;">Group Debate Exercise.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 7 of 10</div>
 </div>
 
-<!-- SLIDE 41: Team Debate -->
-<div class="slide" data-slide="41" data-notes="TEAM DEBATE (15 min): Team A — Left Side. Aesthetics should lead construction. Argue that aesthetic and cultural value is the primary driver of human progress, economic returns, and social identity. Evidence: Guggenheim Bilbao, Sydney Opera House, cultural value of architecture. Team B — Right Side. Performance should lead construction. Argue that structural safety, functional efficiency, and lifecycle performance are the non-negotiable foundation. Evidence: Tacoma Narrows, Hyatt Regency, Walkie Talkie, 8 priorities. Structure: 3 min prepare → 3 min opening each → 2 min rebuttal each → audience vote on most persuasive.">
+<!-- SLIDE 41 -->
+<div class="slide" data-notes="DEBATE EXERCISE (15 min): Team A vs Team B.">
   <div class="section-badge">
     <span class="section-number">🎤</span>
-    <span>Team Debate · 15 Minutes</span>
+    <span>Team Debate</span>
   </div>
-  <h2>Take a Side. <span class="gradient-text">Defend It.</span></h2>
+  <h2>Class Debate</h2>
 
   <div class="debate-arena">
-    <div class="debate-team team-a">
-      <div class="team-badge">Team A · Left Side of Room</div>
-      <h3 style="color: var(--coral);">AESTHETICS SHOULD LEAD</h3>
-      <p style="color: var(--slate-400); margin: 16px 0; line-height: 1.6;">Argue that aesthetic and cultural value is the <strong style="color: var(--white);">primary driver</strong> of human progress, economic returns, and social identity in the built environment.</p>
-      <div style="background: rgba(249, 115, 22, 0.1); border-radius: 12px; padding: 16px; margin-top: 16px;">
-        <div style="font-size: 12px; color: var(--coral); font-weight: 700; margin-bottom: 8px;">📚 Evidence to Use:</div>
-        <ul style="color: var(--slate-400); font-size: 13px; line-height: 1.8; padding-left: 16px;">
-          <li>Guggenheim Bilbao · $100M → $500M return</li>
-          <li>Sydney Opera House · UNESCO World Heritage</li>
-          <li>Cultural value of architecture defines cities</li>
-        </ul>
-      </div>
+    <div class="debate-team">
+      <h3 style="color: var(--coral);">Team A: Aesthetics Lead</h3>
+      <p style="color: var(--slate-400); margin-top: 12px;">Architecture defines cultural identity and drives long-term economic value.</p>
     </div>
-    <div class="debate-team team-b">
-      <div class="team-badge">Team B · Right Side of Room</div>
-      <h3 style="color: var(--electric-blue);">PERFORMANCE SHOULD LEAD</h3>
-      <p style="color: var(--slate-400); margin: 16px 0; line-height: 1.6;">Argue that structural safety, functional efficiency, and lifecycle performance are the <strong style="color: var(--white);">non-negotiable foundation</strong> of all responsible construction.</p>
-      <div style="background: rgba(56, 189, 248, 0.1); border-radius: 12px; padding: 16px; margin-top: 16px;">
-        <div style="font-size: 12px; color: var(--electric-blue); font-weight: 700; margin-bottom: 8px;">📚 Evidence to Use:</div>
-        <ul style="color: var(--slate-400); font-size: 13px; line-height: 1.8; padding-left: 16px;">
-          <li>Tacoma Narrows · Aesthetics over aerodynamics</li>
-          <li>Hyatt Regency · 114 dead from design change</li>
-          <li>Walkie Talkie · Form created physical danger</li>
-          <li>The 8 Priorities · Safety is non-negotiable</li>
-        </ul>
-      </div>
+    <div class="debate-team">
+      <h3 style="color: var(--electric-blue);">Team B: Performance Leads</h3>
+      <p style="color: var(--slate-400); margin-top: 12px;">Safety, structural integrity, and sustainability must form the primary foundation.</p>
     </div>
-  </div>
-
-  <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 20px; margin-top: 32px; text-align: center;">
-    <div style="font-size: 14px; font-weight: 600; color: var(--violet);">⏱️ STRUCTURE: 3 min prepare → 3 min opening each → 2 min rebuttal each → Audience vote on most persuasive</div>
   </div>
 </div>
 
-<!-- SLIDE 42: Section 08 Divider -->
-<div class="slide" data-slide="42" data-notes="SECTION 08 OPENER (10 min): 'You are the lead engineer. A growing city needs a landmark bridge. $400M budget. Real trade-offs. No perfect answer.' Breakout instructions: groups of 4-5, pick ONE option, 5 minutes to prepare a 1-minute pitch, must justify why THIS option and what you're sacrificing.">
+<!-- SLIDE 42 -->
+<div class="slide" data-notes="SECTION 08 OPENER (10 min): Design Challenge.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">08</span>
       <span>Section 08 · 10 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">DESIGN<br>CHALLENGE</h1>
-    <p class="subtitle" style="font-size: 22px;">You are the lead engineer. A growing city needs a landmark bridge. Real budget. Real trade-offs. Decide.</p>
+    <p class="subtitle" style="font-size: 22px;">$400M Landmark Bridge Scenario.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 8 of 10</div>
 </div>
 
-<!-- SLIDE 43: Design Challenge Scenario -->
-<div class="slide" data-slide="43" data-notes="DESIGN CHALLENGE (10 min): Scenario — Landmark bridge, growing city, $400M budget. Four options. Option A: Functional Truss — maximum structural efficiency, minimal visual impact, 100-year lifespan, on budget. Trade-off: no cultural identity. Option B: Iconic Cable-Stay — engineering elegance like Millau, form emerges from structural logic, 20% premium. The balanced approach. Option C: Signature Arch — city-defining architecture, complex construction, 30-50% premium, high economic return potential. Trade-off: higher risk, higher reward. Option D: Innovative Co-Design — engineers and architects co-design from concept. Beauty through performance optimisation. Requires exceptional collaboration. The ideal — hardest to achieve. Debrief: 'How many chose safe vs ambitious? What made you sacrifice what you sacrificed? Would your answer change at $800M? $200M?' Key learning: There is no universally correct answer. The right answer depends on context, risk tolerance, and stakeholder priorities.">
+<!-- SLIDE 43 -->
+<div class="slide" data-notes="CHALLENGE OPTIONS (10 min): Selecting a bridge typology under budget.">
   <div class="section-badge">
     <span class="section-number">🎯</span>
-    <span>Scenario: Landmark Bridge · Growing City · $400M Budget</span>
+    <span>$400M Budget Challenge</span>
   </div>
-  <h2>Which design approach do you <span class="gradient-text">choose?</span></h2>
+  <h2>Select Your Strategy</h2>
 
   <div class="challenge-options">
     <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--slate-400); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Option A</div>
-      <h4>Functional Truss Bridge</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">Maximum structural efficiency. Minimal visual impact. 100-year lifespan. On budget.</p>
-      <div class="tradeoff">Trade-off: No cultural identity</div>
+      <h4>Option A: Standard Truss</h4>
+      <p style="color: var(--slate-400);">Lowest cost, maximum reliability, standard appearance.</p>
     </div>
     <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--electric-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Option B</div>
-      <h4>Iconic Cable-Stay</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">Engineering elegance — like Millau. Form emerges from structural logic. 20% premium.</p>
-      <div class="tradeoff" style="color: var(--electric-blue);">The balanced approach</div>
+      <h4>Option B: Cable-Stayed</h4>
+      <p style="color: var(--slate-400);">Balanced visual appeal and structural efficiency.</p>
     </div>
-    <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--coral); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Option C</div>
-      <h4>Signature Arch</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">City-defining architecture. Complex construction. 30–50% premium. High economic return potential.</p>
-      <div class="tradeoff">Trade-off: Higher risk, higher reward</div>
-    </div>
-    <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Option D</div>
-      <h4>Innovative Co-Design</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">Engineers and architects co-design from concept. Beauty through performance optimisation.</p>
-      <div class="tradeoff" style="color: var(--emerald);">The ideal — hardest to achieve</div>
-    </div>
-  </div>
-
-  <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px; margin-top: 24px; text-align: center;">
-    <div style="font-size: 14px; font-weight: 600; color: var(--electric-blue);">⏱️ 5 MINUTES · Break into groups of 4-5 · Prepare a 1-minute pitch · Justify your choice and what you sacrifice</div>
   </div>
 </div>
 
-<!-- SLIDE 44: Section 09 Divider -->
-<div class="slide" data-slide="44" data-notes="SECTION 09 OPENER (10 min): 'For 5,000 years, form and function were in tension because we didn't have the tools to optimize both. That's changing.' The four technologies: Parametric Design — algorithms generate forms optimised for both structure and aesthetics. BIM — single source of truth, clash detection catches problems before $10M change orders. Digital Twins — Singapore has a digital twin of the entire city. AI-Assisted Design — millions of variations in seconds, but AI needs humans to define 'success.' Critical perspective: technology raises the ceiling for both form AND function, but does NOT eliminate the need for human judgment.">
+<!-- SLIDE 44 -->
+<div class="slide" data-notes="SECTION 09 OPENER (10 min): Future of Construction Technology.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">09</span>
       <span>Section 09 · 10 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">FUTURE OF<br>CONSTRUCTION</h1>
-    <p class="subtitle" style="font-size: 22px;">Technologies that are converging to make form and function genuinely inseparable — for the first time in history.</p>
+    <p class="subtitle" style="font-size: 22px;">Digital Integration & Computational Design.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 9 of 10</div>
 </div>
 
-<!-- SLIDE 45: Tools Merging Form and Function -->
-<div class="slide" data-slide="45" data-notes="TOOLS MERGING (5 min): Parametric Design — algorithms generate forms optimised simultaneously for structural performance AND aesthetics. The trade-off becomes computational, not conflict. Example: Zaha Hadid Architects, Grasshopper + Karamba. BIM — single source of truth for all disciplines. Clash detection catches conflicts between architectural form and structural/MEP requirements before construction. Reduces conflicts by up to 40% on complex projects. Digital Twins — real-time virtual replicas. Monitor performance, predict maintenance, simulate extreme events. Singapore's entire city has a digital twin.">
+<!-- SLIDE 45 -->
+<div class="slide" data-notes="DIGITAL TOOLS (5 min): Parametric design & BIM.">
   <div class="section-badge">
     <span class="section-number">🛠️</span>
-    <span>Tools Merging Form and Function</span>
+    <span>Digital Tools</span>
   </div>
-  <h2>The Convergence Is <span class="gradient-text">Here</span></h2>
-
-  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
-    <div class="card" style="border-top: 3px solid var(--violet);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🧬</div>
-      <h4 style="color: var(--violet);">Parametric Design</h4>
-      <p>Algorithms generate forms optimised simultaneously for <strong style="color: var(--white);">structural performance AND aesthetics</strong>. The trade-off becomes computational, not conflict.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Example: Zaha Hadid Architects · Grasshopper + Karamba</div>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--electric-blue);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🏗️</div>
-      <h4 style="color: var(--electric-blue);">BIM</h4>
-      <p>Single source of truth for all disciplines. <strong style="color: var(--white);">Clash detection</strong> catches conflicts between architectural form and structural/MEP requirements before construction.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Reduces conflicts by up to 40% on complex projects</div>
-    </div>
-    <div class="card" style="border-top: 3px solid var(--emerald);">
-      <div style="font-size: 36px; margin-bottom: 12px;">🌐</div>
-      <h4 style="color: var(--emerald);">Digital Twins</h4>
-      <p>Real-time virtual replicas of physical structures. Monitor performance, predict maintenance, simulate extreme events — all before and during operation.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Singapore's entire city has a digital twin</div>
-    </div>
+  <h2>Merging Engineering & Form</h2>
+  <div class="card-grid">
+    <div class="card"><h4>Parametric Algorithms</h4><p>Optimizes geometry based on structural load paths dynamically.</p></div>
+    <div class="card"><h4>BIM & Clash Detection</h4><p>Identifies spatial conflicts early in design phases.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 46: Emerging Technologies -->
-<div class="slide" data-slide="46" data-notes="EMERGING TECH (5 min): AI-Assisted Design — generative algorithms explore millions of design variations simultaneously, optimising for structural efficiency, cost, AND aesthetic metrics. But: AI needs humans to define what 'success' means. Smart Infrastructure — embedded sensors monitor structural health in real time. Smart facades adapt to environmental conditions. Buildings that respond to performance requirements dynamically. Performance-Based Sustainable Design — net-zero carbon targets are now legally mandated in many jurisdictions. Sustainability joins form and function as a third design pillar. Key insight: technology raises the ceiling for both axes simultaneously. But it does not eliminate the need for human judgment about priorities.">
+<!-- SLIDE 46 -->
+<div class="slide" data-notes="EMERGING TECH (5 min): AI and digital twins.">
   <div class="section-badge">
     <span class="section-number">🚀</span>
-    <span>Emerging Technologies Reshaping the Debate</span>
+    <span>Emerging Technologies</span>
   </div>
-  <h2>The Next <span class="gradient-text">Frontier</span></h2>
-
-  <div class="card-grid" style="margin-top: 32px;">
-    <div class="card" style="border-left: 3px solid var(--violet);">
-      <h4 style="color: var(--violet);">🤖 AI-Assisted Design</h4>
-      <p>Generative algorithms explore <strong style="color: var(--white);">millions of design variations</strong> simultaneously, optimising for structural efficiency, cost, AND aesthetic metrics.</p>
-      <div style="margin-top: 12px; padding: 8px 12px; background: rgba(139, 92, 246, 0.1); border-radius: 6px; font-size: 12px; color: var(--violet);">But: AI needs humans to define what "success" means</div>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--electric-blue);">
-      <h4 style="color: var(--electric-blue);">📡 Smart Infrastructure</h4>
-      <p>Embedded sensors monitor structural health in real time. Smart facades adapt to environmental conditions. Buildings that <strong style="color: var(--white);">respond dynamically</strong>.</p>
-    </div>
-    <div class="card" style="border-left: 3px solid var(--emerald);">
-      <h4 style="color: var(--emerald);">🌱 Performance-Based Sustainable Design</h4>
-      <p>Net-zero carbon targets are now <strong style="color: var(--white);">legally mandated</strong> in many jurisdictions. Sustainability joins form and function as a third design pillar.</p>
-    </div>
-  </div>
-
-  <div style="background: rgba(16, 185, 129, 0.05); border-left: 4px solid var(--emerald); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 32px;">
-    <div style="font-size: 16px; font-weight: 700; color: var(--emerald);">💡 Key Insight</div>
-    <div style="color: var(--slate-300); margin-top: 8px;">Technology raises the ceiling for <strong>both axes simultaneously</strong>. But it does not eliminate the need for human judgment about priorities.</div>
-  </div>
+  <h2>Generative AI & Smart Infrastructure</h2>
+  <div class="card"><p>Generative AI explores structural topology variations to achieve material efficiency while meeting aesthetic objectives.</p></div>
 </div>
 
-<!-- SLIDE 47: Section 10 Divider -->
-<div class="slide" data-slide="47" data-notes="SECTION 10 OPENER (10 min): 'You came in with an opinion. You've seen 5,000 years of evidence. You've argued both sides. Now — what do you believe?' Individual reflection: 2 minutes to write answer. Three options: Aesthetics — building works but is forgotten. Performance — building is celebrated but needs constant intervention. Cost — over budget but building succeeds fully. Group discussion: 3 minutes to share with table. Listen for patterns. Closing poll: same question as beginning. Same options. But you're not the same person. Vote now.">
+<!-- SLIDE 47 -->
+<div class="slide" data-notes="SECTION 10 OPENER (10 min): Final Reflection.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center;">
     <div class="section-badge">
       <span class="section-number">10</span>
       <span>Section 10 · 10 Minutes</span>
     </div>
     <h1 style="font-size: 80px;">FINAL<br>REFLECTION</h1>
-    <p class="subtitle" style="font-size: 22px;">You have the evidence. You have argued a position. Now form your own professional judgment.</p>
+    <p class="subtitle" style="font-size: 22px;">Synthesizing Lessons Learned.</p>
   </div>
-  <div style="text-align: center; color: var(--slate-400); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Section 10 of 10</div>
 </div>
 
-<!-- SLIDE 48: Individual Reflection -->
-<div class="slide" data-slide="48" data-notes="INDIVIDUAL REFLECTION (5 min): 'Take 2 minutes. Write your answer. Be honest. There is no correct answer, but there IS a reasoned answer.' Three options explained. Aesthetics: 'The building works perfectly but is visually undistinguished. Remembered by engineers, forgotten by the public.' Who chooses this: purist engineers, infrastructure specialists. Risk: public disengagement. Performance: 'The building is celebrated but requires constant engineering intervention. Beautiful but imperfect.' Who chooses this: architects, urban designers. Risk: long-term liability. Cost: 'The project goes over budget to achieve both goals. Someone pays more than planned — but the building succeeds fully.' Who chooses this: idealists, those with access to funding. Risk: political backlash. Group discussion: share your answer with your table. Listen for patterns. What would make you change your answer?">
+<!-- SLIDE 48 -->
+<div class="slide" data-notes="INDIVIDUAL REFLECTION (5 min): Personal engineering philosophy.">
   <div class="section-badge">
     <span class="section-number">✍️</span>
-    <span>Individual Reflection · 2 Minutes · Write Your Answer</span>
+    <span>Self Reflection</span>
   </div>
-  <h2>If you were the lead engineer — what would you <span class="gradient-text">sacrifice first?</span></h2>
-
-  <div class="challenge-options" style="margin-top: 24px;">
-    <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--coral); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Sacrifice Aesthetics</div>
-      <h4 style="color: var(--coral);">The Invisible Building</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">The building works perfectly but is visually undistinguished. Remembered by engineers, forgotten by the public.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Risk: Public disengagement, lack of funding for future projects</div>
-    </div>
-    <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--rose); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Sacrifice Performance</div>
-      <h4 style="color: var(--rose);">The Beautiful Burden</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">The building is celebrated but requires constant engineering intervention. Beautiful but imperfect.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Risk: Long-term liability, safety concerns, maintenance burden</div>
-    </div>
-    <div class="challenge-option">
-      <div style="font-size: 11px; color: var(--amber); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Sacrifice Cost</div>
-      <h4 style="color: var(--amber);">The Over-Budget Masterpiece</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">The project goes over budget to achieve both goals. Someone pays more than planned — but the building succeeds fully.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Risk: Political backlash, future project cuts, public anger</div>
-    </div>
-    <div class="challenge-option" style="border-color: var(--emerald);">
-      <div style="font-size: 11px; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Sacrifice Nothing</div>
-      <h4 style="color: var(--emerald);">The Ideal (Co-Design)</h4>
-      <p style="color: var(--slate-400); font-size: 14px; line-height: 1.6;">Engineers and architects collaborate from day one. Form emerges from function. Beauty IS efficiency.</p>
-      <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">Requires: Exceptional collaboration, shared vision, mutual respect</div>
-    </div>
-  </div>
-
-  <div style="text-align: center; margin-top: 24px; color: var(--slate-400); font-size: 14px;">
-    Write your answer · Then discuss with your group · Then share with the room · <strong style="color: var(--white);">There is no correct answer — but there is a reasoned answer.</strong>
-  </div>
+  <h2>What Is Your Priority as an Engineer?</h2>
+  <div class="card"><p>Consider how you will manage trade-offs between aesthetic ambition, structural safety, cost, and sustainability in your upcoming projects.</p></div>
 </div>
 
-<!-- SLIDE 49: Live Poll 2 -->
-<div class="slide" data-slide="49" data-notes="CLOSING POLL (3 min): Same question as Poll #1. Same options. But you're not the same person who answered 90 minutes ago. 'Vote now.' Countdown: 60 seconds. Reveal comparison: show Poll 1 vs Poll 2 side by side. Celebrate shifts. Honor consistency. Ask: 'What specifically changed your mind? Was it a case study? The debate? The disaster footage?' Typical shifts: Performance → Equal (case studies showed balance is possible). Aesthetics → Equal (disasters showed function can't be ignored). Equal → Performance (deep dive into 8 priorities reinforced safety). Equal → Aesthetics (Bilbao and Sydney showed cultural value). Closing line: 'The most successful projects don't choose between form and function. They make them inseparable. That's your job — starting tomorrow.'">
+<!-- SLIDE 49 -->
+<div class="slide" data-notes="CLOSING POLL (3 min): Re-evaluating starting position.">
   <div class="section-badge">
     <span class="section-number">🗳️</span>
-    <span>Live Poll 2 of 2 · Same Question as the Start</span>
+    <span>Final Poll</span>
   </div>
-  <h2>What should lead construction projects?</h2>
-  <p class="subtitle">Did today change your answer? Let's find out.</p>
-
-  <div style="display: flex; gap: 40px; margin-top: 32px;">
-    <div class="poll-container" style="flex: 1;">
-      <div class="poll-question">Cast your final vote:</div>
-      <div class="poll-options">
-        <div class="poll-option" onclick="selectPollOption(this, 'A')">
-          <div class="poll-letter">A</div>
-          <span>Aesthetics</span>
-        </div>
-        <div class="poll-option" onclick="selectPollOption(this, 'B')">
-          <div class="poll-letter">B</div>
-          <span>Performance</span>
-        </div>
-        <div class="poll-option" onclick="selectPollOption(this, 'C')">
-          <div class="poll-letter">C</div>
-          <span>Equal Balance</span>
-        </div>
-      </div>
-      <button class="nav-btn mt-8" style="width: 100%;" onclick="showPoll2Comparison()">Reveal Comparison</button>
-      <div class="poll-results" id="poll2Comparison" style="margin-top: 24px;">
-        <div style="font-size: 14px; font-weight: 700; color: var(--slate-300); margin-bottom: 16px;">📊 Before vs After</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div>
-            <div style="font-size: 12px; color: var(--slate-500); margin-bottom: 8px;">POLL 1 (Start)</div>
-            <div class="result-bar"><div class="result-label">Aesthetics</div><div class="result-track"><div class="result-fill" style="width: 25%; background: var(--coral);">25%</div></div></div>
-            <div class="result-bar"><div class="result-label">Performance</div><div class="result-track"><div class="result-fill" style="width: 40%; background: var(--electric-blue);">40%</div></div></div>
-            <div class="result-bar"><div class="result-label">Equal</div><div class="result-track"><div class="result-fill" style="width: 35%; background: var(--emerald);">35%</div></div></div>
-          </div>
-          <div>
-            <div style="font-size: 12px; color: var(--slate-500); margin-bottom: 8px;">POLL 2 (Now)</div>
-            <div class="result-bar"><div class="result-label">Aesthetics</div><div class="result-track"><div class="result-fill" style="width: 20%; background: var(--coral);">20%</div></div></div>
-            <div class="result-bar"><div class="result-label">Performance</div><div class="result-track"><div class="result-fill" style="width: 35%; background: var(--electric-blue);">35%</div></div></div>
-            <div class="result-bar"><div class="result-label">Equal</div><div class="result-track"><div class="result-fill" style="width: 45%; background: var(--emerald);">45%</div></div></div>
-          </div>
-        </div>
-      </div>
+  <h2>Final Vote: What Should Lead Construction?</h2>
+  <div class="poll-container">
+    <div class="poll-options">
+      <div class="poll-option" onclick="selectPollOption(this)"><span>Aesthetics</span></div>
+      <div class="poll-option" onclick="selectPollOption(this)"><span>Performance</span></div>
+      <div class="poll-option" onclick="selectPollOption(this)"><span>Co-Designed Equilibrium</span></div>
     </div>
-
-    <div style="width: 320px;">
-      <div style="background: var(--white); border-radius: 16px; padding: 32px; text-align: center;">
-        <div style="font-size: 48px; margin-bottom: 12px;">📱</div>
-        <div style="font-size: 18px; font-weight: 700; color: var(--deep-slate); margin-bottom: 8px;">SCAN TO VOTE</div>
-        <div style="font-size: 14px; color: var(--slate-600); margin-bottom: 16px;">menti.com</div>
-        <div style="font-size: 32px; font-weight: 900; color: var(--blue-600);">FORM2024</div>
-        <div style="width: 160px; height: 160px; background: var(--slate-100); margin: 16px auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--slate-400); font-size: 12px;">QR CODE<br>PLACEHOLDER</div>
-      </div>
+    <button class="nav-btn" style="width: 100%; margin-top: 20px;" onclick="showPollResults('poll2Results')">Show Comparison</button>
+    <div class="poll-results" id="poll2Results">
+      <div class="result-bar"><div class="result-label">Equilibrium</div><div class="result-track"><div class="result-fill" style="width: 65%; background: var(--emerald);">65%</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 50: Did Today Change Your Answer? -->
-<div class="slide" data-slide="50" data-notes="REFLECTION DISCUSSION (3 min): 'What changed — and what specifically caused the shift? Was it a case study? The debate? The disaster footage?' Let 3-4 people share. Don't correct — honor their journey. If someone didn't change, ask: 'What evidence would it take?' The goal is not consensus. The goal is awareness of one's own decision-making framework.">
+<!-- SLIDE 50 -->
+<div class="slide" data-notes="REFLECTION DISCUSSION (3 min): Shift in perspectives.">
   <div class="section-badge">
     <span class="section-number">💬</span>
-    <span>Reflection Discussion</span>
+    <span>Discussion</span>
   </div>
-  <h2>Did today <span class="gradient-text">change</span> your answer?</h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;">
-    <div style="background: rgba(16, 185, 129, 0.05); border-radius: 16px; padding: 28px; border: 1px solid rgba(16, 185, 129, 0.2);">
-      <div style="font-size: 20px; font-weight: 700; color: var(--emerald); margin-bottom: 16px;">✓ If you CHANGED your mind:</div>
-      <ul style="color: var(--slate-300); line-height: 2; padding-left: 20px;">
-        <li>What specifically caused the shift?</li>
-        <li>Was it a case study?</li>
-        <li>The debate?</li>
-        <li>The disaster footage?</li>
-        <li>A quote that resonated?</li>
-      </ul>
-    </div>
-    <div style="background: rgba(56, 189, 248, 0.05); border-radius: 16px; padding: 28px; border: 1px solid rgba(56, 189, 248, 0.2);">
-      <div style="font-size: 20px; font-weight: 700; color: var(--electric-blue); margin-bottom: 16px;">→ If you stayed the SAME:</div>
-      <ul style="color: var(--slate-300); line-height: 2; padding-left: 20px;">
-        <li>What evidence reinforced your view?</li>
-        <li>What would it take to change your mind?</li>
-        <li>Is your position based on principle or experience?</li>
-        <li>How does your professional role shape your answer?</li>
-      </ul>
-    </div>
-  </div>
-
-  <div style="text-align: center; margin-top: 32px; color: var(--slate-400); font-size: 16px;">
-    The goal is not consensus. The goal is <strong style="color: var(--white);">awareness of your own decision-making framework.</strong>
-  </div>
+  <h2>Did Your Perspective Shift?</h2>
+  <div class="card"><p>Discussion on how real-world failure cases and structural constraints influence initial aesthetic visions.</p></div>
 </div>
 
-<!-- SLIDE 51: References -->
-<div class="slide" data-slide="51" data-notes="REFERENCES (1 min): Share for further reading. Addis (1990) — definitive treatment of form-function philosophy. Levy & Salvadori (1992) — accessible case studies in structural failure. Sullivan (1896) — original 'form follows function' essay. Frampton (1992) — historical context. Drew (1995) — complete Sydney Opera House history. IStructE Structural Failures Database — Tacoma Narrows, Hyatt Regency analyses.">
+<!-- SLIDE 51 -->
+<div class="slide" data-notes="REFERENCES (1 min): Recommended Reading.">
   <div class="section-badge">
     <span class="section-number">📚</span>
-    <span>References & Further Reading</span>
+    <span>References</span>
   </div>
-  <h2>Continue Your <span class="gradient-text">Learning</span></h2>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;">
-    <div>
-      <div style="font-size: 14px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Core References</div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>Addis, W. (1990)</h4>
-        <p style="font-size: 13px;"><em>Structural Engineering: The Nature of Theory and Design</em><br>Ellis Horwood · The definitive treatment of form-function philosophy in structures</p>
-      </div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>Levy, M. & Salvadori, M. (1992)</h4>
-        <p style="font-size: 13px;"><em>Why Buildings Fall Down</em><br>W.W. Norton · Accessible case studies in structural failure for undergraduates</p>
-      </div>
-      <div class="card">
-        <h4>Sullivan, L. (1896)</h4>
-        <p style="font-size: 13px;"><em>The Tall Office Building Artistically Considered</em><br>Lippincott's Magazine · The original "form follows function" essay</p>
-      </div>
-    </div>
-    <div>
-      <div style="font-size: 14px; color: var(--violet); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Case Study Sources</div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>Frampton, K. (1992)</h4>
-        <p style="font-size: 13px;"><em>Modern Architecture: A Critical History</em><br>Thames and Hudson · Historical context for all case studies</p>
-      </div>
-      <div class="card" style="margin-bottom: 12px;">
-        <h4>Drew, P. (1995)</h4>
-        <p style="font-size: 13px;"><em>Sydney Opera House: Jørn Utzon</em><br>Phaidon · Complete engineering and design history</p>
-      </div>
-      <div class="card">
-        <h4>Institution of Structural Engineers</h4>
-        <p style="font-size: 13px;"><em>Structural Failures Database</em><br>istructe.org · Tacoma Narrows, Hyatt Regency case analyses</p>
-      </div>
-    </div>
+  <h2>Key Texts</h2>
+  <div class="card-grid">
+    <div class="card"><h4>Addis, W. (1990)</h4><p>Structural Engineering: The Nature of Theory and Design.</p></div>
+    <div class="card"><h4>Levy & Salvadori (1992)</h4><p>Why Buildings Fall Down.</p></div>
   </div>
 </div>
 
-<!-- SLIDE 52: The Conclusion -->
-<div class="slide" data-slide="52" data-notes="THE CONCLUSION (2 min): Closing narrative. 'Five thousand years. The same debate. The same tension. But now you have evidence. You have argued a position. You have seen what happens when the balance fails.' The five teachers: Gothic Cathedral — engineering unlocks form. Eiffel Tower — structural logic becomes beauty. Burj Khalifa — form co-designed with engineering. Millau Viaduct — elegance IS efficiency. Tacoma Narrows — the cost of getting it wrong. Final charge: 'Every building, bridge, and structure you design is a vote. A vote for form. A vote for function. Or a vote for both. Make it count.' Post-session: share references, provide QR code to digital workbook, offer 1:1 follow-up, collect feedback.">
+<!-- SLIDE 52 -->
+<div class="slide" data-notes="CONCLUSION (2 min): Final Charge to Engineers.">
   <div class="flex-grow" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <div class="quote" style="border-left: none; padding-left: 0; font-size: 28px; max-width: 900px;">
       "The most successful engineering projects are not those that choose between form and function. They are the projects that make form and function <span class="gradient-text">inseparable.</span>"
     </div>
-
-    <div style="margin-top: 48px; display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;">
-      <div style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 8px;">⛪</div>
-        <div style="font-size: 12px; color: var(--slate-400);">Gothic Cathedral<br><span style="color: var(--slate-500);">Engineering unlocks form</span></div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 8px;">🗼</div>
-        <div style="font-size: 12px; color: var(--slate-400);">Eiffel Tower<br><span style="color: var(--slate-500);">Structural logic becomes beauty</span></div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 8px;">🏗️</div>
-        <div style="font-size: 12px; color: var(--slate-400);">Burj Khalifa<br><span style="color: var(--slate-500);">Form co-designed with engineering</span></div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 8px;">🌉</div>
-        <div style="font-size: 12px; color: var(--slate-400);">Millau Viaduct<br><span style="color: var(--slate-500);">Elegance IS efficiency</span></div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 8px;">💥</div>
-        <div style="font-size: 12px; color: var(--slate-400);">Tacoma Narrows<br><span style="color: var(--slate-500);">The cost of getting it wrong</span></div>
-      </div>
-    </div>
-
-    <div style="margin-top: 48px; font-size: 18px; color: var(--slate-400); max-width: 700px; line-height: 1.8;">
-      Every building, bridge, and structure you design is a vote.<br>
-      A vote for <strong style="color: var(--coral);">form</strong>. A vote for <strong style="color: var(--electric-blue);">function</strong>.<br>
-      Or a vote for <strong style="color: var(--emerald);">both</strong>.<br>
-      <span style="font-size: 24px; color: var(--white); font-weight: 700;">Make it count.</span>
-    </div>
-  </div>
-
-  <div style="text-align: center; color: var(--slate-500); font-size: 12px; text-transform: uppercase; letter-spacing: 3px;">
-    CIVIL · ARCHITECTURE · CONSTRUCTION ENGINEERING
+    <div style="margin-top: 32px; font-size: 20px; font-weight: 700; color: var(--electric-blue);">Make every decision count.</div>
   </div>
 </div>
 
 <!-- ================= NAVIGATION BAR ================= -->
 <div class="nav-bar">
   <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Previous</button>
-  <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">52</span></div>
+  <div class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">52</span></div>
   <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
 </div>
 
-<!-- ================= JAVASCRIPT ================= -->
+<!-- ================= JAVASCRIPT ENGINE ================= -->
 <script>
 let currentSlide = 1;
-const totalSlides = 52;
+let slides = [];
+let totalSlides = 0;
+
+function initEngine() {
+  slides = document.querySelectorAll('.slide');
+  totalSlides = slides.length;
+
+  // Update total slide count displays
+  document.getElementById('totalSlides').textContent = totalSlides;
+  document.querySelectorAll('.total-slides-display').forEach(el => {
+    el.textContent = totalSlides;
+  });
+
+  showSlide(currentSlide);
+}
 
 function showSlide(n) {
-  const slides = document.querySelectorAll('.slide');
   if (n > totalSlides) currentSlide = 1;
-  if (n < 1) currentSlide = totalSlides;
+  else if (n < 1) currentSlide = totalSlides;
+  else currentSlide = n;
 
-  slides.forEach(slide => slide.classList.remove('active'));
-  slides[currentSlide - 1].classList.add('active');
+  slides.forEach((slide, idx) => {
+    if (idx === currentSlide - 1) {
+      slide.classList.add('active');
+    } else {
+      slide.classList.remove('active');
+    }
+  });
 
+  // Update navbar numbers
   document.getElementById('currentSlide').textContent = currentSlide;
-  document.getElementById('prevBtn').disabled = currentSlide === 1;
-  document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
 
-  // Update progress bar
-  const progress = (currentSlide / totalSlides) * 100;
-  document.getElementById('progressFill').style.width = progress + '%';
+  // Update button disabled state
+  document.getElementById('prevBtn').disabled = (currentSlide === 1);
+  document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+
+  // Update top progress bar
+  const progressPercent = (currentSlide / totalSlides) * 100;
+  document.getElementById('progressFill').style.width = progressPercent + '%';
 
   // Update speaker notes
-  const activeSlide = slides[currentSlide - 1];
-  const notes = activeSlide.getAttribute('data-notes') || 'No speaker notes for this slide.';
-  document.getElementById('speakerNotes').textContent = notes;
+  const activeSlideElement = slides[currentSlide - 1];
+  const notesText = activeSlideElement ? (activeSlideElement.getAttribute('data-notes') || 'No speaker notes for this slide.') : '';
+  document.getElementById('speakerNotes').textContent = notesText;
 
-  // Scroll to top
-  window.scrollTo(0, 0);
+  // Reset scroll position on slide change
+  if (activeSlideElement) {
+    activeSlideElement.scrollTop = 0;
+  }
 }
 
 function nextSlide() {
@@ -2529,8 +1665,11 @@ function prevSlide() {
   }
 }
 
-// Keyboard navigation
+// Keyboard Navigation Listener
 document.addEventListener('keydown', (e) => {
+  const isInputField = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+  if (isInputField) return;
+
   if (e.key === 'ArrowRight' || e.key === ' ') {
     e.preventDefault();
     nextSlide();
@@ -2542,46 +1681,42 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Speaker panel toggle
+// UI Helper Functions
 function toggleSpeakerPanel() {
   document.getElementById('speakerPanel').classList.toggle('open');
 }
 
-// Poll functionality
-function selectPollOption(element, value) {
+function selectPollOption(element) {
   const parent = element.parentElement;
   parent.querySelectorAll('.poll-option').forEach(opt => opt.classList.remove('selected'));
   element.classList.add('selected');
 }
 
-function showPollResults() {
-  document.getElementById('poll1Results').classList.add('show');
+function showPollResults(id) {
+  const res = document.getElementById(id);
+  if (res) res.classList.add('show');
 }
 
-function showPoll2Comparison() {
-  document.getElementById('poll2Comparison').classList.add('show');
-}
-
-// Quiz functionality
+// Quiz Functions
 let currentQuestion = 1;
 const quizData = [
   {
     question: '1. "Form ever follows function" — who coined this phrase and when?',
     options: ['A. Frank Lloyd Wright, 1939', 'B. Louis Sullivan, 1896', 'C. Walter Gropius, 1919', 'D. Le Corbusier, 1923'],
     correct: 1,
-    explanation: '✓ Correct! Louis Sullivan coined "Form ever follows function" in 1896. Wright was his student who later said "Form and function are one."'
+    explanation: '✓ Correct! Louis Sullivan coined the phrase in 1896.'
   },
   {
-    question: '2. What was the primary engineering cause of the Tacoma Narrows Bridge collapse (1940)?',
-    options: ['A. Foundation failure', 'B. Cable corrosion', 'C. Aerodynamic flutter / resonance', 'D. Overloading'],
+    question: '2. What was the primary aerodynamic cause of the Tacoma Narrows Bridge failure?',
+    options: ['A. Foundation sliding', 'B. Cable corrosion', 'C. Torsional aerodynamic flutter', 'D. Static overload'],
     correct: 2,
-    explanation: '✓ Correct! Aerodynamic flutter (torsional oscillation) caused the collapse. The slender deck design created a resonance condition in moderate winds.'
+    explanation: '✓ Correct! Aerodynamic flutter created uncontrolled torsional oscillations.'
   },
   {
-    question: '3. What method evaluates total cost over a building's complete service life?',
-    options: ['A. Capital Cost Analysis', 'B. Replacement Value Planning', 'C. Lifecycle Cost Assessment', 'D. Total Asset Review'],
+    question: '3. What evaluation process accounts for total ownership costs across service life?',
+    options: ['A. Initial Capital Assessment', 'B. Replacement Costing', 'C. Lifecycle Cost Assessment', 'D. Asset Depreciation Review'],
     correct: 2,
-    explanation: '✓ Correct! Lifecycle Cost Assessment (LCCA) evaluates total cost of ownership including construction, operation, maintenance, and disposal over the full service life.'
+    explanation: '✓ Correct! Lifecycle Cost Assessment (LCCA) evaluates total long-term project costs.'
   }
 ];
 
@@ -2598,7 +1733,7 @@ function checkAnswer(element, isCorrect) {
 }
 
 function nextQuestion() {
-  if (currentQuestion < 3) {
+  if (currentQuestion < quizData.length) {
     currentQuestion++;
     const data = quizData[currentQuestion - 1];
     document.getElementById('quizQuestion').textContent = data.question;
@@ -2613,12 +1748,11 @@ function nextQuestion() {
     });
     document.getElementById('quizExplanation').textContent = data.explanation;
     document.getElementById('quizExplanation').classList.remove('show');
-    document.getElementById('qNum').textContent = currentQuestion;
   }
 }
 
-// Initialize
-showSlide(1);
+// Initialize presentation engine on load
+window.addEventListener('DOMContentLoaded', initEngine);
 </script>
 
 </body>
