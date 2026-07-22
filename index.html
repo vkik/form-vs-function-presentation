@@ -663,7 +663,7 @@
   <div style="background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: 12px; padding: 20px; max-width: 600px;">
     <div style="font-size: 11px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">📋 Presenter Quick Reference</div>
     <div style="font-size: 13px; color: var(--slate-400); line-height: 1.8;">
-      • Vote: <strong style="color: var(--white);">menti.com/alacrm41c44q</strong> &nbsp;|&nbsp; 2 Live Polls &nbsp;|&nbsp; 1 Team Debate &nbsp;|&nbsp; 1 Design Challenge<br>
+      • 2 Live Polls &nbsp;|&nbsp; 1 Team Debate &nbsp;|&nbsp; 1 Design Challenge<br>
       • Videos: Tacoma Narrows + Burj Khalifa &nbsp;|&nbsp; Total: 120 min
     </div>
   </div>
@@ -724,80 +724,72 @@
 </div>
 
 <!-- SLIDE 4: Live Poll 1 -->
-<div class="slide" data-notes="LIVE POLL #1 (1.5 min): Show QR code for audience to vote via phone. Record these results to compare with Poll #2 at the end.">
+<div class="slide" data-notes="LIVE POLL #1 (1.5 min): Take a show of hands (or use any live-poll tool you like). Type the counts into the presenter boxes and hit Update Chart — the bars animate to the audience split. Record these to compare with Poll #2 at the end.">
   <div class="section-badge">
     <span class="section-number">🗳️</span>
     <span>Live Poll 1 of 2</span>
   </div>
   <h2>What should lead construction projects?</h2>
 
-  <div style="display: flex; gap: 40px; margin-top: 32px; align-items: flex-start;">
-    <!-- Left: Voting Box & Bar Chart -->
+  <div style="display: flex; gap: 40px; margin-top: 24px; align-items: flex-start;">
+    <!-- Left: Live-updating bar chart -->
     <div class="poll-container" style="flex: 1; margin-top: 0;">
-      <div class="poll-question">Cast your vote:</div>
-      <div class="poll-options">
-        <div class="poll-option" onclick="selectPollOption(this)">
-          <div class="poll-letter">A</div>
-          <span>Aesthetics</span>
-        </div>
-        <div class="poll-option" onclick="selectPollOption(this)">
-          <div class="poll-letter">B</div>
-          <span>Performance</span>
-        </div>
-        <div class="poll-option" onclick="selectPollOption(this)">
-          <div class="poll-letter">C</div>
-          <span>Equal Balance</span>
-        </div>
-      </div>
-      <!-- Presenter input: type the real vote counts from Mentimeter -->
-      <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.08); border: 1px dashed var(--violet); border-radius: 12px;">
-        <div style="font-size: 11px; font-weight: 800; color: var(--violet); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">🎤 Presenter: enter live vote counts</div>
-        <div style="display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;">
-          <div style="flex: 1; min-width: 70px;">
-            <label for="votesA" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Aesthetics</label>
-            <input type="number" min="0" id="votesA" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
-          </div>
-          <div style="flex: 1; min-width: 70px;">
-            <label for="votesB" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Performance</label>
-            <input type="number" min="0" id="votesB" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
-          </div>
-          <div style="flex: 1; min-width: 70px;">
-            <label for="votesC" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Equal</label>
-            <input type="number" min="0" id="votesC" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
-          </div>
-        </div>
-      </div>
-      <button class="nav-btn" style="width: 100%; margin-top: 12px;" onclick="updatePollResults()">Update &amp; Reveal Results</button>
+      <div class="poll-question">Current Audience Standings:</div>
 
-      <div class="poll-results" id="poll1Results">
-        <div class="result-bar">
-          <div class="result-label">Aesthetics</div>
-          <div class="result-track"><div class="result-fill" id="fillA" style="width: 0%; background: var(--coral);">0%</div></div>
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span><strong>A. Aesthetics</strong></span>
+          <span id="valA">0%</span>
         </div>
-        <div class="result-bar">
-          <div class="result-label">Performance</div>
-          <div class="result-track"><div class="result-fill" id="fillB" style="width: 0%; background: var(--electric-blue);">0%</div></div>
+        <div class="result-track"><div class="result-fill" id="barA" style="width: 0%; background: var(--coral);"></div></div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span><strong>B. Performance</strong></span>
+          <span id="valB">0%</span>
         </div>
-        <div class="result-bar">
-          <div class="result-label">Equal</div>
-          <div class="result-track"><div class="result-fill" id="fillC" style="width: 0%; background: var(--emerald);">0%</div></div>
+        <div class="result-track"><div class="result-fill" id="barB" style="width: 0%; background: var(--electric-blue);"></div></div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span><strong>C. Equal Balance</strong></span>
+          <span id="valC">0%</span>
         </div>
+        <div class="result-track"><div class="result-fill" id="barC" style="width: 0%; background: var(--emerald);"></div></div>
+      </div>
+
+      <!-- Presenter controls: type raw counts or percentages; bars animate to the result -->
+      <div style="display: flex; gap: 10px; margin-top: 28px; background: rgba(139, 92, 246, 0.08); border: 1px dashed var(--violet); padding: 16px; border-radius: 12px; align-items: flex-end; flex-wrap: wrap;">
+        <div style="width: 100%; font-size: 11px; font-weight: 800; color: var(--violet); text-transform: uppercase; letter-spacing: 1px;">🎤 Presenter: enter counts (or %)</div>
+        <div style="flex: 1; min-width: 64px;">
+          <label for="inA" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Aesthetics</label>
+          <input type="number" min="0" id="inA" placeholder="0" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white);">
+        </div>
+        <div style="flex: 1; min-width: 64px;">
+          <label for="inB" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Performance</label>
+          <input type="number" min="0" id="inB" placeholder="0" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white);">
+        </div>
+        <div style="flex: 1; min-width: 64px;">
+          <label for="inC" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Equal</label>
+          <input type="number" min="0" id="inC" placeholder="0" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white);">
+        </div>
+        <button class="nav-btn" onclick="updateLiveBars()">Update Chart</button>
       </div>
     </div>
 
-    <!-- Right: QR Code Card -->
-    <div style="width: 340px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; text-align: center;">
-      <div style="font-size: 13px; font-weight: 800; color: var(--electric-blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">📱 Audience Voting</div>
-      <div style="font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 4px;">SCAN TO VOTE</div>
-      <div style="font-size: 14px; color: var(--slate-400); margin-bottom: 16px;">Go to <strong>menti.com</strong></div>
+    <!-- Right: QR to follow the presentation on your own device -->
+    <div style="width: 320px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 28px; text-align: center;">
+      <div style="font-size: 12px; font-weight: 800; color: var(--electric-blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">📱 Audience Access</div>
+      <div style="font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 4px;">SCAN TO FOLLOW</div>
+      <div style="font-size: 13px; color: var(--slate-400); margin-bottom: 16px;">Open this presentation on your phone</div>
 
-      <!-- Generated Live QR Code Image -->
-      <div style="background: #ffffff; padding: 16px; border-radius: 16px; display: inline-block; margin-bottom: 16px;">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fwww.menti.com%2Falacrm41c44q" alt="Voting QR Code" style="width: 180px; height: 180px; display: block;" />
+      <div style="background: #ffffff; padding: 14px; border-radius: 16px; display: inline-block; margin-bottom: 16px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fvkik.github.io%2Fform-vs-function-presentation%2F" alt="Presentation link QR code" style="width: 170px; height: 170px; display: block;" />
       </div>
 
-      <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 6px;">Or visit:</div>
-      <div style="font-size: 20px; font-weight: 900; color: var(--electric-blue); letter-spacing: 1px;">menti.com/alacrm41c44q</div>
+      <div style="font-size: 12px; color: var(--slate-400);">Live presentation URL</div>
     </div>
   </div>
 </div>
@@ -1763,25 +1755,23 @@ function showPollResults(id) {
   if (res) res.classList.add('show');
 }
 
-// Presenter enters real vote counts; bars update to the resulting percentages
-function updatePollResults() {
+// Presenter enters vote counts (or percentages); bars animate to the resulting share
+function updateLiveBars() {
   const readCount = (id) => Math.max(0, parseInt(document.getElementById(id).value, 10) || 0);
-  const a = readCount('votesA');
-  const b = readCount('votesB');
-  const c = readCount('votesC');
+  const a = readCount('inA');
+  const b = readCount('inB');
+  const c = readCount('inC');
   const total = a + b + c;
 
-  const setFill = (id, count) => {
+  const setBar = (barId, valId, count) => {
     const percent = total > 0 ? Math.round((count / total) * 100) : 0;
-    const el = document.getElementById(id);
-    el.style.width = percent + '%';
-    el.textContent = percent + '%';
+    document.getElementById(barId).style.width = percent + '%';
+    document.getElementById(valId).textContent = percent + '%';
   };
 
-  setFill('fillA', a);
-  setFill('fillB', b);
-  setFill('fillC', c);
-  document.getElementById('poll1Results').classList.add('show');
+  setBar('barA', 'valA', a);
+  setBar('barB', 'valB', b);
+  setBar('barC', 'valC', c);
 }
 
 // Quiz Functions
