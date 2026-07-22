@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Form vs Function — Interactive Training Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
-
   :root {
     --deep-slate: #0f172a;
     --slate-800: #1e293b;
@@ -662,7 +663,7 @@
   <div style="background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: 12px; padding: 20px; max-width: 600px;">
     <div style="font-size: 11px; color: var(--electric-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">📋 Presenter Quick Reference</div>
     <div style="font-size: 13px; color: var(--slate-400); line-height: 1.8;">
-      • Poll Code: <strong style="color: var(--white);">FORM2024</strong> &nbsp;|&nbsp; 4 Live Polls &nbsp;|&nbsp; 1 Team Debate &nbsp;|&nbsp; 1 Design Challenge<br>
+      • Poll Code: <strong style="color: var(--white);">FORM2024</strong> &nbsp;|&nbsp; 2 Live Polls &nbsp;|&nbsp; 1 Team Debate &nbsp;|&nbsp; 1 Design Challenge<br>
       • Videos: Tacoma Narrows + Burj Khalifa &nbsp;|&nbsp; Total: 120 min
     </div>
   </div>
@@ -1091,7 +1092,7 @@
         <strong style="color: var(--emerald);">✓ Correct!</strong> Louis Sullivan coined the phrase in 1896.
       </div>
       <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-        <button class="nav-btn" onclick="nextQuestion()">Next Question →</button>
+        <button class="nav-btn" id="quizNextBtn" onclick="nextQuestion()">Next Question →</button>
       </div>
     </div>
   </div>
@@ -1552,7 +1553,22 @@
     </div>
     <button class="nav-btn" style="width: 100%; margin-top: 20px;" onclick="showPollResults('poll2Results')">Show Comparison</button>
     <div class="poll-results" id="poll2Results">
-      <div class="result-bar"><div class="result-label">Equilibrium</div><div class="result-track"><div class="result-fill" style="width: 65%; background: var(--emerald);">65%</div></div></div>
+      <div style="font-size: 13px; color: var(--slate-400); margin-bottom: 16px;">Opening poll → Final vote</div>
+      <div class="result-bar">
+        <div class="result-label">Aesthetics</div>
+        <div class="result-track"><div class="result-fill" style="width: 15%; background: var(--coral);">15%</div></div>
+        <div style="width: 70px; font-size: 12px; color: var(--slate-400); text-align: right;">was 25%</div>
+      </div>
+      <div class="result-bar">
+        <div class="result-label">Performance</div>
+        <div class="result-track"><div class="result-fill" style="width: 20%; background: var(--electric-blue);">20%</div></div>
+        <div style="width: 70px; font-size: 12px; color: var(--slate-400); text-align: right;">was 40%</div>
+      </div>
+      <div class="result-bar">
+        <div class="result-label">Equilibrium</div>
+        <div class="result-track"><div class="result-fill" style="width: 65%; background: var(--emerald);">65%</div></div>
+        <div style="width: 70px; font-size: 12px; color: var(--emerald); text-align: right;">was 35%</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1613,7 +1629,22 @@ function initEngine() {
     el.textContent = totalSlides;
   });
 
+  makeClickablesAccessible();
   showSlide(currentSlide);
+}
+
+// Give mouse-only interactive divs keyboard support (Enter / Space) and a11y roles
+function makeClickablesAccessible() {
+  document.querySelectorAll('.poll-option, .quiz-option, .myth-card, .challenge-option').forEach(el => {
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    });
+  });
 }
 
 function showSlide(n) {
@@ -1677,7 +1708,7 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     prevSlide();
   } else if (e.key === 'Escape') {
-    toggleSpeakerPanel();
+    document.getElementById('speakerPanel').classList.remove('open');
   }
 });
 
@@ -1704,50 +1735,88 @@ const quizData = [
     question: '1. "Form ever follows function" — who coined this phrase and when?',
     options: ['A. Frank Lloyd Wright, 1939', 'B. Louis Sullivan, 1896', 'C. Walter Gropius, 1919', 'D. Le Corbusier, 1923'],
     correct: 1,
-    explanation: '✓ Correct! Louis Sullivan coined the phrase in 1896.'
+    explanation: 'Louis Sullivan coined the phrase in 1896.'
   },
   {
     question: '2. What was the primary aerodynamic cause of the Tacoma Narrows Bridge failure?',
     options: ['A. Foundation sliding', 'B. Cable corrosion', 'C. Torsional aerodynamic flutter', 'D. Static overload'],
     correct: 2,
-    explanation: '✓ Correct! Aerodynamic flutter created uncontrolled torsional oscillations.'
+    explanation: 'Aerodynamic flutter created uncontrolled torsional oscillations.'
   },
   {
     question: '3. What evaluation process accounts for total ownership costs across service life?',
     options: ['A. Initial Capital Assessment', 'B. Replacement Costing', 'C. Lifecycle Cost Assessment', 'D. Asset Depreciation Review'],
     correct: 2,
-    explanation: '✓ Correct! Lifecycle Cost Assessment (LCCA) evaluates total long-term project costs.'
+    explanation: 'Lifecycle Cost Assessment (LCCA) evaluates total long-term project costs.'
   }
 ];
 
+let questionAnswered = false;
+
 function checkAnswer(element, isCorrect) {
+  // Lock the question once an answer has been chosen
+  if (questionAnswered) return;
+  questionAnswered = true;
+
+  const data = quizData[currentQuestion - 1];
   const options = element.parentElement.querySelectorAll('.quiz-option');
   options.forEach((opt, idx) => {
-    if (idx === quizData[currentQuestion - 1].correct) {
+    if (idx === data.correct) {
       opt.classList.add('correct');
     } else if (opt === element && !isCorrect) {
       opt.classList.add('wrong');
     }
   });
-  document.getElementById('quizExplanation').classList.add('show');
+
+  const explanation = document.getElementById('quizExplanation');
+  const prefix = isCorrect
+    ? '<strong style="color: var(--emerald);">✓ Correct!</strong> '
+    : '<strong style="color: var(--rose);">✗ Not quite.</strong> ';
+  explanation.innerHTML = prefix + data.explanation;
+  explanation.style.borderLeftColor = isCorrect ? 'var(--emerald)' : 'var(--rose)';
+  explanation.classList.add('show');
+}
+
+function renderQuestion() {
+  const data = quizData[currentQuestion - 1];
+  questionAnswered = false;
+
+  document.getElementById('quizQuestion').textContent = data.question;
+
+  const optionsContainer = document.getElementById('quizOptions');
+  optionsContainer.innerHTML = '';
+  data.options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-option';
+    div.textContent = opt;
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.onclick = function() { checkAnswer(this, idx === data.correct); };
+    div.onkeydown = function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
+    };
+    optionsContainer.appendChild(div);
+  });
+
+  const explanation = document.getElementById('quizExplanation');
+  explanation.classList.remove('show');
+  explanation.style.borderLeftColor = 'var(--emerald)';
+
+  // Update the Next button for the last question
+  const nextBtn = document.getElementById('quizNextBtn');
+  if (currentQuestion >= quizData.length) {
+    nextBtn.textContent = 'Quiz Complete ✓';
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.textContent = 'Next Question →';
+    nextBtn.disabled = false;
+  }
 }
 
 function nextQuestion() {
   if (currentQuestion < quizData.length) {
     currentQuestion++;
-    const data = quizData[currentQuestion - 1];
-    document.getElementById('quizQuestion').textContent = data.question;
-    const optionsContainer = document.getElementById('quizOptions');
-    optionsContainer.innerHTML = '';
-    data.options.forEach((opt, idx) => {
-      const div = document.createElement('div');
-      div.className = 'quiz-option';
-      div.textContent = opt;
-      div.onclick = function() { checkAnswer(this, idx === data.correct); };
-      optionsContainer.appendChild(div);
-    });
-    document.getElementById('quizExplanation').textContent = data.explanation;
-    document.getElementById('quizExplanation').classList.remove('show');
+    renderQuestion();
   }
 }
 
