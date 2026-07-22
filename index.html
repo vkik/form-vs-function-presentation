@@ -723,16 +723,17 @@
   </div>
 </div>
 
-<!-- SLIDE 4 -->
-<div class="slide" data-notes="LIVE POLL #1 (1.5 min): Record these results — compared to Poll #2 at the end.">
+<!-- SLIDE 4: Live Poll 1 -->
+<div class="slide" data-notes="LIVE POLL #1 (1.5 min): Show QR code for audience to vote via phone. Record these results to compare with Poll #2 at the end.">
   <div class="section-badge">
     <span class="section-number">🗳️</span>
     <span>Live Poll 1 of 2</span>
   </div>
   <h2>What should lead construction projects?</h2>
 
-  <div style="display: flex; gap: 40px; margin-top: 32px;">
-    <div class="poll-container" style="flex: 1;">
+  <div style="display: flex; gap: 40px; margin-top: 32px; align-items: flex-start;">
+    <!-- Left: Voting Box & Bar Chart -->
+    <div class="poll-container" style="flex: 1; margin-top: 0;">
       <div class="poll-question">Cast your vote:</div>
       <div class="poll-options">
         <div class="poll-option" onclick="selectPollOption(this)">
@@ -749,6 +750,7 @@
         </div>
       </div>
       <button class="nav-btn" style="width: 100%; margin-top: 20px;" onclick="showPollResults('poll1Results')">Reveal Results</button>
+
       <div class="poll-results" id="poll1Results">
         <div class="result-bar">
           <div class="result-label">Aesthetics</div>
@@ -764,6 +766,37 @@
         </div>
       </div>
     </div>
+
+    <!-- Right: QR Code Card -->
+    <div style="width: 340px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; text-align: center;">
+      <div style="font-size: 13px; font-weight: 800; color: var(--electric-blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">📱 Audience Voting</div>
+      <div style="font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 4px;">SCAN TO VOTE</div>
+      <div style="font-size: 14px; color: var(--slate-400); margin-bottom: 16px;">Go to <strong>menti.com</strong></div>
+
+      <!-- Generated Live QR Code Image -->
+      <div style="background: #ffffff; padding: 16px; border-radius: 16px; display: inline-block; margin-bottom: 16px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.menti.com" alt="Voting QR Code" style="width: 180px; height: 180px; display: block;" />
+      </div>
+
+      <div style="font-size: 12px; color: var(--slate-400); margin-bottom: 6px;">Use Code:</div>
+      <div style="font-size: 28px; font-weight: 900; color: var(--electric-blue); letter-spacing: 2px;">FORM2024</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4B: Live Poll 1 — Real-Time Results (Mentimeter embed) -->
+<div class="slide" data-notes="LIVE RESULTS (1 min): Switch to this slide to show the live Mentimeter results updating in real time as the audience votes. Replace YOUR_POLL_ID in the iframe src with your actual Mentimeter presentation ID.">
+  <div class="section-badge">
+    <span class="section-number">📊</span>
+    <span>Live Poll 1 · Real-Time Results</span>
+  </div>
+  <h2>Live Results — What should lead construction projects?</h2>
+  <p class="subtitle" style="margin-bottom: 24px;">Watch the votes update in real time.</p>
+
+  <div style="max-width: 1000px;">
+    <iframe src="https://www.mentimeter.com/app/embed/YOUR_POLL_ID"
+            title="Live poll results"
+            style="width: 100%; height: 420px; border: none; border-radius: 16px; background: rgba(255,255,255,0.03);"></iframe>
   </div>
 </div>
 
