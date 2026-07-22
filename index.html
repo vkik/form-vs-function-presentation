@@ -749,20 +749,38 @@
           <span>Equal Balance</span>
         </div>
       </div>
-      <button class="nav-btn" style="width: 100%; margin-top: 20px;" onclick="showPollResults('poll1Results')">Reveal Results</button>
+      <!-- Presenter input: type the real vote counts from Mentimeter -->
+      <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.08); border: 1px dashed var(--violet); border-radius: 12px;">
+        <div style="font-size: 11px; font-weight: 800; color: var(--violet); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">🎤 Presenter: enter live vote counts</div>
+        <div style="display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 70px;">
+            <label for="votesA" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Aesthetics</label>
+            <input type="number" min="0" id="votesA" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
+          </div>
+          <div style="flex: 1; min-width: 70px;">
+            <label for="votesB" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Performance</label>
+            <input type="number" min="0" id="votesB" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
+          </div>
+          <div style="flex: 1; min-width: 70px;">
+            <label for="votesC" style="font-size: 11px; color: var(--slate-400); display: block; margin-bottom: 4px;">Equal</label>
+            <input type="number" min="0" id="votesC" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--slate-700); background: var(--slate-800); color: var(--white); font-size: 15px;">
+          </div>
+        </div>
+      </div>
+      <button class="nav-btn" style="width: 100%; margin-top: 12px;" onclick="updatePollResults()">Update &amp; Reveal Results</button>
 
       <div class="poll-results" id="poll1Results">
         <div class="result-bar">
           <div class="result-label">Aesthetics</div>
-          <div class="result-track"><div class="result-fill" style="width: 25%; background: var(--coral);">25%</div></div>
+          <div class="result-track"><div class="result-fill" id="fillA" style="width: 0%; background: var(--coral);">0%</div></div>
         </div>
         <div class="result-bar">
           <div class="result-label">Performance</div>
-          <div class="result-track"><div class="result-fill" style="width: 40%; background: var(--electric-blue);">40%</div></div>
+          <div class="result-track"><div class="result-fill" id="fillB" style="width: 0%; background: var(--electric-blue);">0%</div></div>
         </div>
         <div class="result-bar">
           <div class="result-label">Equal</div>
-          <div class="result-track"><div class="result-fill" style="width: 35%; background: var(--emerald);">35%</div></div>
+          <div class="result-track"><div class="result-fill" id="fillC" style="width: 0%; background: var(--emerald);">0%</div></div>
         </div>
       </div>
     </div>
@@ -1743,6 +1761,27 @@ function selectPollOption(element) {
 function showPollResults(id) {
   const res = document.getElementById(id);
   if (res) res.classList.add('show');
+}
+
+// Presenter enters real vote counts; bars update to the resulting percentages
+function updatePollResults() {
+  const readCount = (id) => Math.max(0, parseInt(document.getElementById(id).value, 10) || 0);
+  const a = readCount('votesA');
+  const b = readCount('votesB');
+  const c = readCount('votesC');
+  const total = a + b + c;
+
+  const setFill = (id, count) => {
+    const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+    const el = document.getElementById(id);
+    el.style.width = percent + '%';
+    el.textContent = percent + '%';
+  };
+
+  setFill('fillA', a);
+  setFill('fillB', b);
+  setFill('fillC', c);
+  document.getElementById('poll1Results').classList.add('show');
 }
 
 // Quiz Functions
